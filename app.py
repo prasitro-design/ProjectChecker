@@ -383,31 +383,6 @@ with st.sidebar:
 
     st.markdown("---")
     st.caption("👨‍💻 พัฒนาโดย: นายประสิทธิ์ รอดพันธุ์\n\nนักวิชาการศึกษาชำนาญการ")
-st.markdown("---")
-    total_count = get_total_checks()
-    if total_count is not None:
-        st.markdown(
-            f"""
-            <div style="
-                text-align: center;
-                padding: 12px 10px;
-                background: linear-gradient(135deg, #f4fbf7, #ffffff);
-                border-radius: 14px;
-                border: 1.5px solid #bce1ce;
-                box-shadow: 0 4px 10px rgba(0, 102, 51, 0.05);
-            ">
-                <div style="font-size: 13px; color: #006633; font-weight: 500; margin-bottom: 2px;">
-                    📊 สถิติการตรวจสะสม
-                </div>
-                <div style="font-size: 24px; color: #006633; font-weight: 700; line-height: 1.2;">
-                    {total_count:,} <span style="font-size: 13px; font-weight: 400; color: #666;">ครั้ง</span>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    else:
-        st.caption("📊 สถิติการตรวจสะสม: (กำลังเชื่อมต่อข้อมูล)")
 
 # ==========================================
 # 6. ส่วนแสดงผลเนื้อหาหลัก
