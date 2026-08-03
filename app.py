@@ -292,7 +292,7 @@ with col2:
     st.markdown("### 🤖 2. ผลการวิเคราะห์จาก AI")
     
     if uploaded_file is not None and document_text.strip():
-        if st.button("✨ เริ่มให้ AI ตรวจสอบและให้คะแนน"):
+        if st.button("🚀 เริ่มให้ AI ตรวจสอบเอกสารโครงการ"):
             
             result = "" 
             
