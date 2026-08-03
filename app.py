@@ -141,12 +141,12 @@ def set_background(image_file):
             }}
 
             /* ==========================================
-               🎨 กรอบ 2 ฝั่ง 2 โทนสี (แก้ไขรองรับ [data-testid="stColumn"])
+               🎨 กรอบ 2 ฝั่ง (เฉพาะพื้นที่หลัก .main เท่านั้น)
                ========================================== */
 
-            /* 📁 คอลัมน์ซ้าย (อัปโหลดเอกสาร) - โทนเขียวมิ้นต์ */
-            [data-testid="stColumn"]:nth-child(1),
-            [data-testid="column"]:nth-child(1) {{
+            /* 📁 คอลัมน์ซ้าย (อัปโหลดเอกสาร) */
+            .main [data-testid="stColumn"]:nth-child(1),
+            .main [data-testid="column"]:nth-child(1) {{
                 background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%) !important;
                 border: 2px solid #10b981 !important;
                 border-radius: 20px !important;
@@ -155,15 +155,25 @@ def set_background(image_file):
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both !important;
             }}
 
-            /* 🤖 คอลัมน์ขวา (ผลวิเคราะห์ AI) - โทนฟ้าเทอร์ควอยซ์ */
-            [data-testid="stColumn"]:nth-child(2),
-            [data-testid="column"]:nth-child(2) {{
+            /* 🤖 คอลัมน์ขวา (ผลวิเคราะห์ AI) */
+            .main [data-testid="stColumn"]:nth-child(2),
+            .main [data-testid="column"]:nth-child(2) {{
                 background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%) !important;
                 border: 2px solid #0284c7 !important;
                 border-radius: 20px !important;
                 padding: 24px 22px !important;
                 box-shadow: 0 10px 25px rgba(2, 132, 199, 0.12) !important;
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both !important;
+            }}
+
+            /* 🛑 ป้องกันไม่ให้ Sidebar ติดกรอบหรือแอนิเมชัน */
+            [data-testid="stSidebar"] [data-testid="stColumn"],
+            [data-testid="stSidebar"] [data-testid="column"] {{
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                animation: none !important;
             }}
 
             h2, h3 {{
