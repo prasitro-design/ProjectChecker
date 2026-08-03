@@ -383,6 +383,21 @@ with st.sidebar:
 
     st.markdown("---")
     st.caption("👨‍💻 พัฒนาโดย: นายประสิทธิ์ รอดพันธุ์\n\nนักวิชาการศึกษาชำนาญการ")
+    st.markdown("---")
+    try:
+        # ดึงจำนวนโครงการที่ตรวจสำเร็จแล้วจาก Google Sheets
+        creds_dict = json.loads(st.secrets["GCP_CREDENTIALS"])
+        scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+        creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
+        client = gspread.authorize(creds)
+        sheet = client.open("ประวัติการตรวจโครงการ").sheet1
+        total_checks = len(sheet.get_all_values()) - 1  # หัก Row หัวตารางออก 1 แถว
+        if total_checks < 0: 
+            total_checks = 0
+
+        st.metric(label="📊 ตรวจสะสมทั้งหมด", value=f"{total_checks:,} ครั้ง")
+    except Exception:
+        pass
 
 # ==========================================
 # 6. ส่วนแสดงผลเนื้อหาหลัก
