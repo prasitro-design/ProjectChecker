@@ -132,8 +132,8 @@ set_background('background.jpg')
 # 3. ตั้งค่า API Key ของ Gemini
 # ==========================================
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-# หมายเหตุ: หาก gemini-3.5-flash มีข้อผิดพลาดในการรัน ให้ลองเปลี่ยนเป็น gemini-1.5-flash นะครับ
-model = genai.GenerativeModel('gemini-3.5-flash')
+# หมายเหตุ: หาก gemini-3.6-flash มีข้อผิดพลาดในการรัน ให้ลองเปลี่ยนเป็น gemini-1.5-flash นะครับ
+model = genai.GenerativeModel('gemini-3.6-flash')
 
 # ==========================================
 # 4. ฟังก์ชันเบื้องหลัง (PDF, AI, Google Sheets)
