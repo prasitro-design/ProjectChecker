@@ -9,6 +9,7 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 import pytz
 import re
+import os  # เพิ่มเข้ามาเพื่อใช้เช็คไฟล์ template.docx
 
 # ==========================================
 # 1. ตั้งค่าหน้าเว็บ (Page Config) ต้องอยู่บรรทัดแรกสุด
@@ -87,9 +88,9 @@ def set_background(image_file):
                 color: #006633 !important;
                 font-weight: 500;
             }}
-            .stButton>button {{
+            .stButton>button, .stDownloadButton>button {{
                 background: linear-gradient(135deg, #006633, #00b09b);
-                color: white;
+                color: white !important;
                 font-weight: 500;
                 font-size: 16px;
                 border-radius: 12px;
@@ -99,7 +100,7 @@ def set_background(image_file):
                 transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
                 width: 100%;
             }}
-            .stButton>button:hover {{
+            .stButton>button:hover, .stDownloadButton>button:hover {{
                 transform: translateY(-4px) scale(1.02);
                 box-shadow: 0 8px 25px rgba(0, 102, 51, 0.45);
                 color: white;
@@ -131,6 +132,7 @@ set_background('background.jpg')
 # 3. ตั้งค่า API Key ของ Gemini
 # ==========================================
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+# หมายเหตุ: หาก gemini-3.5-flash มีข้อผิดพลาดในการรัน ให้ลองเปลี่ยนเป็น gemini-1.5-flash นะครับ
 model = genai.GenerativeModel('gemini-3.5-flash')
 
 # ==========================================
@@ -252,12 +254,28 @@ with st.sidebar:
     st.markdown("### 📌 คำแนะนำการใช้งาน")
     st.info("""
     **ขั้นตอนการตรวจเอกสาร:**
-    1. บันทึกไฟล์แบบเสนอโครงการของท่านเป็นนามสกุล **.pdf** 
+    1. ดาวน์โหลดแบบฟอร์ม Word ไปพิมพ์รายละเอียด
+    2. บันทึกไฟล์เป็นนามสกุล **.pdf** 
        *(ต้องเป็นไฟล์ที่แปลงจาก MS Word เท่านั้น!)*
-    2. อัปโหลดไฟล์จากข้อ 1
-    3. ตรวจสอบว่าระบบอ่านเนื้อหาได้ครบถ้วน
+    3. อัปโหลดไฟล์และกดยอมรับเงื่อนไข
     4. กดปุ่ม **เริ่มให้ AI ตรวจสอบและให้คะแนน**
     """)
+    
+    st.markdown("---")
+    st.markdown("### 📥 ดาวน์โหลดแบบฟอร์ม")
+    # ปุ่มดาวน์โหลดไฟล์ Word
+    if os.path.exists("template.docx"):
+        with open("template.docx", "rb") as file:
+            st.download_button(
+                label="📄 โหลดแบบฟอร์มโครงการ (Word)",
+                data=file,
+                file_name="แบบฟอร์มเสนอโครงการ_คณะศึกษาศาสตร์.docx",
+                mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                use_container_width=True
+            )
+    else:
+        st.warning("⚠️ เจ้าหน้าที่กำลังอัปเดตไฟล์แบบฟอร์ม...")
+
     st.markdown("---")
     st.caption("👨‍💻 พัฒนาโดย: นายประสิทธิ์ รอดพันธุ์\n\nนักวิชาการศึกษาชำนาญการ")
 
@@ -294,37 +312,50 @@ with col2:
     st.markdown("### 🤖 2. ผลการวิเคราะห์จาก AI")
     
     if uploaded_file is not None and document_text.strip():
-        if st.button("🚀 เริ่มให้ AI ตรวจสอบเอกสารโครงการ"):
-            
-            result = "" 
-            
-            with st.status("🤖 AI กำลังอ่านและตรวจสอบเอกสารโครงการ ระบบใช้เวลาประมาณ 1 นาที กรุณารอสักครู่...", expanded=True) as status:
-                st.write("⏳ กำลังตรวจสอบโครงสร้างตามแบบฟอร์ม...")
-                time.sleep(1.5)
-                st.write("🔍 กำลังประเมินความสมเหตุสมผลและตรวจสอบการสะกดคำ...")
-                time.sleep(1)
-                st.write("💯 กำลังคำนวณคะแนนภาพรวม...")
+        # --- เพิ่มกล่องกดยอมรับ PDPA ---
+        st.markdown("<div style='background-color: #fff9e6; padding: 15px; border-radius: 10px; border-left: 5px solid #ffcc00; margin-bottom: 20px; font-size: 14px;'>", unsafe_allow_html=True)
+        pdpa_consent = st.checkbox("🛡️ ข้าพเจ้ารับทราบและยินยอมให้ระบบประมวลผลข้อมูลในเอกสารนี้ด้วยปัญญาประดิษฐ์ (AI) เพื่อการตรวจสอบความถูกต้องเบื้องต้น ข้อมูลจะไม่ถูกนำไปใช้ฝึกสอน AI (No Model Training) และไม่มีการจัดเก็บเอกสารต้นฉบับไว้ในระบบ")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # ปุ่มจะทำงานต่อเมื่อผู้ใช้ติ๊กถูกที่ Checkbox เท่านั้น
+        if pdpa_consent:
+            if st.button("🚀 เริ่มให้ AI ตรวจสอบเอกสารโครงการ"):
                 
-                try:
-                    result = analyze_document(document_text)
+                result = "" 
+                
+                with st.status("🤖 AI กำลังอ่านและตรวจสอบเอกสารโครงการ ระบบใช้เวลาประมาณ 1 นาที กรุณารอสักครู่...", expanded=True) as status:
+                    st.write("⏳ กำลังตรวจสอบโครงสร้างตามแบบฟอร์ม...")
+                    time.sleep(1.5)
+                    st.write("🔍 กำลังประเมินความสมเหตุสมผลและตรวจสอบการสะกดคำ...")
+                    time.sleep(1)
+                    st.write("💯 กำลังคำนวณคะแนนภาพรวม...")
                     
-                    # --- เพิ่มส่วนการทำงานเบื้องหลัง: บันทึกลง Google Sheets ---
-                    st.write("📊 กำลังบันทึกประวัติการตรวจเข้าระบบ...")
-                    log_to_google_sheets(uploaded_file.name, result)
-                    # --------------------------------------------------
+                    try:
+                        result = analyze_document(document_text)
+                        
+                        # --- เพิ่มส่วนการทำงานเบื้องหลัง: บันทึกลง Google Sheets ---
+                        st.write("📊 กำลังบันทึกประวัติการตรวจเข้าระบบ...")
+                        log_to_google_sheets(uploaded_file.name, result)
+                        # --------------------------------------------------
+                        
+                        status.update(label="✅ AI ประเมินผลเสร็จสิ้น!", state="complete", expanded=False)
+                    except Exception as e:
+                        status.update(label="❌ เกิดข้อผิดพลาด!", state="error")
+                        st.error(f"เกิดข้อผิดพลาด: {e}")
+                
+                if result:
+                    st.balloons()
+                    st.toast("🎉 AI ให้คะแนนเอกสารเรียบร้อยแล้ว!", icon="✨")
                     
-                    status.update(label="✅ AI ประเมินผลเสร็จสิ้น!", state="complete", expanded=False)
-                except Exception as e:
-                    status.update(label="❌ เกิดข้อผิดพลาด!", state="error")
-                    st.error(f"เกิดข้อผิดพลาด: {e}")
+                    st.markdown("<br>", unsafe_allow_html=True)
+                    st.markdown("### 📋 สรุปผลการตรวจสอบ")
+                    st.markdown(result)
+                    
+                    # --- เพิ่มข้อความหมายเหตุด้านล่างสุด ---
+                    st.info("⚠️ **หมายเหตุ:** การประเมินนี้วิเคราะห์โดยปัญญาประดิษฐ์ (AI) เพื่อใช้เป็นแนวทางในการปรับปรุงเอกสารเบื้องต้นเท่านั้น **การพิจารณาอนุมัติโครงการขั้นสุดท้ายจะขึ้นอยู่กับดุลยพินิจของคณะกรรมการและอาจารย์ที่ปรึกษา**")
+                    
+        else:
+            st.info("👈 กรุณากาเครื่องหมาย 🛡️ ยอมรับเงื่อนไขการประมวลผลข้อมูลด้านบน ก่อนกดปุ่มตรวจสอบ")
             
-            if result:
-                st.balloons()
-                st.toast("🎉 AI ให้คะแนนเอกสารเรียบร้อยแล้ว!", icon="✨")
-                
-                st.markdown("<br>", unsafe_allow_html=True)
-                st.markdown("### 📋 สรุปผลการตรวจสอบ")
-                st.markdown(result)
-                
     else:
         st.info("👈 กรุณาอัปโหลดเอกสารในช่องด้านซ้ายมือ เพื่อเปิดใช้งานระบบ AI")
