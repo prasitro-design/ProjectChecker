@@ -54,14 +54,14 @@ def set_background(image_file):
             }}
 
             /* ==========================================
-               ✨ KEYFRAME ANIMATIONS (เอฟเฟกต์เคลื่อนไหว)
+               ✨ KEYFRAME ANIMATIONS (ปรับให้นุ่มนวล ช้าลง)
                ========================================== */
             
-            /* 1. Animation ค่อยๆ ลอยขึ้นมาจากด้านล่างพร้อมจางปรากฏเข้ามา */
-            @keyframes fadeInUp {{
+            /* 1. Animation ค่อยๆ ลอยขึ้นอย่างนุ่มนวล (ระยะเคลื่อนตัว 20px) */
+            @keyframes fadeInUpSmooth {{
                 0% {{
                     opacity: 0;
-                    transform: translateY(30px);
+                    transform: translateY(20px);
                 }}
                 100% {{
                     opacity: 1;
@@ -81,23 +81,23 @@ def set_background(image_file):
                 50% {{ filter: drop-shadow(0 0 12px rgba(150, 201, 61, 0.8)); }}
             }}
 
-            /* 4. Animation เปล่งออร่าสำหรับกล่องเตือน */
+            /* 4. Animation เปล่งออร่าแบบนุ่มนวลสำหรับกล่องเตือน */
             @keyframes alertPulse {{
                 0%, 100% {{
                     box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
                     transform: scale(1);
                 }}
                 50% {{
-                    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.45);
-                    transform: scale(1.01);
+                    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+                    transform: scale(1.008);
                 }}
             }}
 
             /* ==========================================
-               📌 นำ ANIMATION ไปประยุกต์ใช้กับส่วนต่าง ๆ
+               📌 กำหนดเวลาหน่วงและระยะเวลา (Duration & Stagger Delay)
                ========================================== */
 
-            /* Header Box ลอยเข้ามาเป็นอย่างแรก */
+            /* Header Box ลอยเข้ามาเป็นอันดับแรก (1.2s) */
             .header-box {{
                 background-color: #f4fbf7;
                 border: 2px solid #bce1ce;
@@ -106,10 +106,10 @@ def set_background(image_file):
                 margin-bottom: 30px;
                 box-shadow: 0 8px 20px rgba(0, 102, 51, 0.08);
                 text-align: center;
-                animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
             }}
 
-            /* หัวข้อใหญ่ตัวหนังสือวิ้งๆ + ลอยเข้ามา */
+            /* หัวข้อใหญ่ตัวหนังสือวิ้งๆ */
             h1 {{
                 background: linear-gradient(
                     110deg, 
@@ -124,7 +124,7 @@ def set_background(image_file):
                 background-size: 200% auto;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-                animation: shimmerEffect 3.5s linear infinite, glowPulse 2.5s ease-in-out infinite;
+                animation: shimmerEffect 4s linear infinite, glowPulse 3s ease-in-out infinite;
                 font-weight: 600;
                 text-align: center;
                 margin: 0; 
@@ -132,7 +132,7 @@ def set_background(image_file):
                 line-height: 1.4;
             }}
 
-            /* Subtitle ทยอยลอยตามเข้ามา (หน่วงเวลา 0.5s) */
+            /* Subtitle ทยอยลอยตามเข้ามา (หน่วงเวลา 0.35s) */
             .subtitle-text {{
                 text-align: center;
                 font-size: 16px;
@@ -145,17 +145,17 @@ def set_background(image_file):
                 border: 1px solid #e0f2e9;
                 box-shadow: 0 4px 10px rgba(0, 102, 51, 0.05);
                 font-weight: 400;
-                animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
+                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
             }}
 
-            /* คอลัมน์ซ้าย (อัปโหลด) ทยอยลอยเข้ามา (หน่วงเวลา 1 s) */
+            /* คอลัมน์ซ้าย (อัปโหลด) ทยอยลอยเข้ามา (หน่วงเวลา 0.6s) */
             [data-testid="column"]:nth-child(1) {{
-                animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
+                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
             }}
 
-            /* คอลัมน์ขวา (ผลวิเคราะห์ AI) ทยอยลอยเข้ามา (หน่วงเวลา 1.5s) */
+            /* คอลัมน์ขวา (ผลวิเคราะห์ AI) ทยอยลอยเข้ามา (หน่วงเวลา 0.85s) */
             [data-testid="column"]:nth-child(2) {{
-                animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both;
+                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
             }}
 
             h2, h3 {{
@@ -172,11 +172,11 @@ def set_background(image_file):
                 border: none;
                 padding: 12px 24px;
                 box-shadow: 0 4px 15px rgba(0, 102, 51, 0.3);
-                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                 width: 100%;
             }}
             .stButton>button:hover, .stDownloadButton>button:hover {{
-                transform: translateY(-4px) scale(1.02);
+                transform: translateY(-3px) scale(1.015);
                 box-shadow: 0 8px 25px rgba(0, 102, 51, 0.45);
                 color: white;
             }}
@@ -200,7 +200,7 @@ def set_background(image_file):
                 border-radius: 16px !important;
                 padding: 10px !important;
                 box-shadow: 0 6px 20px rgba(255, 167, 38, 0.15) !important;
-                animation: fadeInUp 0.5s ease-out both;
+                animation: fadeInUpSmooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
             }}
             [data-testid="stStatusWidget"] summary label, 
             [data-testid="stStatusWidget"] summary span {{
