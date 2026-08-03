@@ -368,25 +368,7 @@ with col2:
                 
                 result = "" 
                 
-                with st.status("🤖 AI กำลังอ่านและตรวจสอบเอกสารโครงการ ระบบใช้เวลาประมาณ 1 นาที กรุณารอสักครู่...", expanded=True) as status:
-                    # 📌 เพิ่มป้ายเตือนขนาดใหญ่ สะดุดตา ป้องกันนิสิตกดปิดก่อนเสร็จ
-                    st.markdown("""
-                    <div style='background: linear-gradient(135deg, #fff3cd, #ffe8a1); 
-                                border: 2px solid #ffebaa; 
-                                border-left: 8px solid #ff9800; 
-                                padding: 18px 20px; 
-                                border-radius: 14px; 
-                                margin-bottom: 20px; 
-                                box-shadow: 0 4px 15px rgba(255,152,0,0.15); 
-                                text-align: center;'>
-                        <div style='font-size: 21px; font-weight: 700; color: #b78103; margin-bottom: 6px;'>
-                            🚨 กรุณาอย่าเพิ่งปิดหน้าจอ หรือ กด Refresh!
-                        </div>
-                        <div style='font-size: 16px; color: #856404; font-weight: 500;'>
-                            🤖 AI กำลังอ่านและวิเคราะห์เอกสารอย่างละเอียด (ระบบใช้เวลาประมวลผลประมาณ 1 นาที)
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
+                with st.status("🚨 🤖 AI กำลังอ่านและตรวจสอบเอกสารโครงการ ระบบใช้เวลาประมาณ 1 นาที กรุณารอสักครู่...", expanded=True) as status:
                     st.write("⏳ กำลังตรวจสอบโครงสร้างตามแบบฟอร์ม...")
                     time.sleep(1.5)
                     st.write("🔍 กำลังประเมินความสมเหตุสมผลและตรวจสอบการสะกดคำ...")
