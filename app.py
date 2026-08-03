@@ -61,16 +61,50 @@ def set_background(image_file):
                 box-shadow: 0 8px 20px rgba(0, 102, 51, 0.08);
                 text-align: center;
             }}
+
+            /* ✨ Animation แสงกวาดผ่านตัวอักษร (Shimmer) ✨ */
+            @keyframes shimmerEffect {{
+                0% {{
+                    background-position: -200% center;
+                }}
+                100% {{
+                    background-position: 200% center;
+                }}
+            }}
+
+            /* ✨ Animation ตัวหนังสือเรืองแสงวิ้งๆ (Glow Pulse) ✨ */
+            @keyframes glowPulse {{
+                0%, 100% {{
+                    filter: drop-shadow(0 0 2px rgba(0, 102, 51, 0.2));
+                }}
+                50% {{
+                    filter: drop-shadow(0 0 12px rgba(150, 201, 61, 0.8));
+                }}
+            }}
+
+            /* 📌 กำหนดสไตล์หัวข้อใหญ่ให้มีแสงวิ้งๆ */
             h1 {{
-                background: -webkit-linear-gradient(45deg, #006633, #96c93d);
+                background: linear-gradient(
+                    110deg, 
+                    #006633 0%, 
+                    #006633 30%, 
+                    #96c93d 45%, 
+                    #ffffff 50%, 
+                    #96c93d 55%, 
+                    #006633 70%, 
+                    #006633 100%
+                );
+                background-size: 200% auto;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
+                animation: shimmerEffect 3.5s linear infinite, glowPulse 2.5s ease-in-out infinite;
                 font-weight: 600;
                 text-align: center;
                 margin: 0; 
                 padding: 0;
                 line-height: 1.4;
             }}
+
             .subtitle-text {{
                 text-align: center;
                 font-size: 16px;
@@ -124,10 +158,9 @@ def set_background(image_file):
             unsafe_allow_html=True
         )
     except FileNotFoundError:
-        pass # ป้องกัน Error กรณีหารูปไม่เจอตอน Test ในเครื่อง
+        pass
 
-set_background('background.jpg') 
-
+set_background('background.jpg')
 # ==========================================
 # 3. ตั้งค่า API Key ของ Gemini
 # ==========================================
