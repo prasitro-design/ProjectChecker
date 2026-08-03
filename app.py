@@ -53,19 +53,9 @@ def set_background(image_file):
                 font-family: 'Kanit', sans-serif !important;
             }}
 
-            /* ==========================================
-               ✨ KEYFRAME ANIMATIONS
-               ========================================== */
-            
             @keyframes fadeInUpSmooth {{
-                0% {{
-                    opacity: 0;
-                    transform: translateY(22px);
-                }}
-                100% {{
-                    opacity: 1;
-                    transform: translateY(0);
-                }}
+                0% {{ opacity: 0; transform: translateY(22px); }}
+                100% {{ opacity: 1; transform: translateY(0); }}
             }}
 
             @keyframes shimmerEffect {{
@@ -79,19 +69,10 @@ def set_background(image_file):
             }}
 
             @keyframes alertPulse {{
-                0%, 100% {{
-                    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
-                    transform: scale(1);
-                }}
-                50% {{
-                    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
-                    transform: scale(1.008);
-                }}
+                0%, 100% {{ box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2); transform: scale(1); }}
+                50% {{ box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4); transform: scale(1.008); }}
             }}
 
-            /* ==========================================
-               📌 HEADER BOX
-               ========================================== */
             .header-box {{
                 background-color: #f4fbf7;
                 border: 2px solid #bce1ce;
@@ -140,11 +121,6 @@ def set_background(image_file):
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
             }}
 
-            /* ==========================================
-               🎨 กรอบ 2 ฝั่ง (ยกเว้น Sidebar)
-               ========================================== */
-
-            /* 📁 คอลัมน์ซ้าย (อัปโหลดเอกสาร) */
             [data-testid="stColumn"]:not([data-testid="stSidebar"] *):nth-child(1),
             div[data-testid="column"]:not([data-testid="stSidebar"] *):nth-child(1) {{
                 background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%) !important;
@@ -155,7 +131,6 @@ def set_background(image_file):
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both !important;
             }}
 
-            /* 🤖 คอลัมน์ขวา (ผลวิเคราะห์ AI) */
             [data-testid="stColumn"]:not([data-testid="stSidebar"] *):nth-child(2),
             div[data-testid="column"]:not([data-testid="stSidebar"] *):nth-child(2) {{
                 background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%) !important;
@@ -166,10 +141,7 @@ def set_background(image_file):
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both !important;
             }}
 
-            h2, h3 {{
-                color: #006633 !important;
-                font-weight: 600;
-            }}
+            h2, h3 {{ color: #006633 !important; font-weight: 600; }}
 
             .stButton>button, .stDownloadButton>button {{
                 background: linear-gradient(135deg, #006633, #00b09b);
@@ -196,12 +168,7 @@ def set_background(image_file):
                 padding: 20px;
                 transition: all 0.3s ease;
             }}
-            [data-testid="stFileUploadDropzone"]:hover {{
-                background-color: #e8f7f0;
-                border-color: #006633;
-            }}
 
-            /* 🔔 ตกแต่งกล่องสถานะประมวลผล st.status */
             [data-testid="stStatusWidget"] {{
                 border: 2px solid #ffa726 !important;
                 background-color: #fffde7 !important;
@@ -209,12 +176,6 @@ def set_background(image_file):
                 padding: 10px !important;
                 box-shadow: 0 6px 20px rgba(255, 167, 38, 0.15) !important;
                 animation: fadeInUpSmooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-            }}
-            [data-testid="stStatusWidget"] summary label, 
-            [data-testid="stStatusWidget"] summary span {{
-                font-size: 19px !important;
-                font-weight: 600 !important;
-                color: #e65100 !important;
             }}
 
             #MainMenu {{visibility: hidden;}}
@@ -383,21 +344,31 @@ with st.sidebar:
 
     st.markdown("---")
     st.caption("👨‍💻 พัฒนาโดย: นายประสิทธิ์ รอดพันธุ์\n\nนักวิชาการศึกษาชำนาญการ")
-    st.markdown("---")
-    try:
-        # ดึงจำนวนโครงการที่ตรวจสำเร็จแล้วจาก Google Sheets
-        creds_dict = json.loads(st.secrets["GCP_CREDENTIALS"])
-        scopes = ["https://www.googleapis.com/auth/spreadsheets"]
-        creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
-        client = gspread.authorize(creds)
-        sheet = client.open("ประวัติการตรวจโครงการ").sheet1
-        total_checks = len(sheet.get_all_values()) - 1  # หัก Row หัวตารางออก 1 แถว
-        if total_checks < 0: 
-            total_checks = 0
-
-        st.metric(label="📊 ตรวจสะสมทั้งหมด", value=f"{total_checks:,} ครั้ง")
-    except Exception:
-        pass
+st.markdown("---")
+    total_count = get_total_checks()
+    if total_count is not None:
+        st.markdown(
+            f"""
+            <div style="
+                text-align: center;
+                padding: 12px 10px;
+                background: linear-gradient(135deg, #f4fbf7, #ffffff);
+                border-radius: 14px;
+                border: 1.5px solid #bce1ce;
+                box-shadow: 0 4px 10px rgba(0, 102, 51, 0.05);
+            ">
+                <div style="font-size: 13px; color: #006633; font-weight: 500; margin-bottom: 2px;">
+                    📊 สถิติการตรวจสะสม
+                </div>
+                <div style="font-size: 24px; color: #006633; font-weight: 700; line-height: 1.2;">
+                    {total_count:,} <span style="font-size: 13px; font-weight: 400; color: #666;">ครั้ง</span>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    else:
+        st.caption("📊 สถิติการตรวจสะสม: (กำลังเชื่อมต่อข้อมูล)")
 
 # ==========================================
 # 6. ส่วนแสดงผลเนื้อหาหลัก
