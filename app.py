@@ -300,14 +300,15 @@ col1, col2 = st.columns([1, 1.2], gap="large")
 
 with col1:
     st.markdown("### 📁 1. อัปโหลดเอกสาร")
-    uploaded_file = st.file_uploader("ลากไฟล์ PDF มาวางที่นี่", type="pdf", label_visibility="collapsed")
-    # 📌 ส่วนที่เพิ่มเข้ามา: แสดงข้อความตัวแดงเตือนตั้งชื่อไฟล์
+    # 📌 ข้อความเตือนตัวสีแดง (ย้ายมาอยู่ล่างหัวข้อ และ อยู่ก่อนกล่องอัปโหลด)
     st.markdown(
-        "<p style='color: #e74c3c; font-size: 14px; font-weight: 500; margin-top: 8px; margin-bottom: 15px;'>"
+        "<p style='color: #e74c3c; font-size: 14px; font-weight: 500; margin-top: -5px; margin-bottom: 12px;'>"
         "🔴 <b>โปรดตรวจสอบว่า ได้ตั้งชื่อไฟล์เป็นชื่อโครงการแล้วหรือยัง?</b>"
         "</p>", 
         unsafe_allow_html=True
     )
+    uploaded_file = st.file_uploader("ลากไฟล์ PDF มาวางที่นี่", type="pdf", label_visibility="collapsed")
+
     if uploaded_file is not None:
         st.toast("✅ อัปโหลดไฟล์สำเร็จ! พร้อมให้ AI ตรวจสอบแล้ว", icon="🎉")
         st.success("✅ อัปโหลดไฟล์สำเร็จ!")
