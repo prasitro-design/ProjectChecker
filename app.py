@@ -100,7 +100,7 @@ def set_background(image_file):
                 margin-bottom: 30px;
                 box-shadow: 0 8px 20px rgba(0, 102, 51, 0.08);
                 text-align: center;
-                animation: fadeInUpSmooth 2s cubic-bezier(0.16, 1, 0.3, 1) both;
+                animation: fadeInUpSmooth 3s cubic-bezier(0.16, 1, 0.3, 1) both;
             }}
 
             h1 {{
