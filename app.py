@@ -54,7 +54,7 @@ def set_background(image_file):
             }}
 
             /* ==========================================
-               ✨ KEYFRAME ANIMATIONS (ลอยเข้าแบบสมูทๆ)
+               ✨ KEYFRAME ANIMATIONS
                ========================================== */
             
             @keyframes fadeInUpSmooth {{
@@ -141,27 +141,29 @@ def set_background(image_file):
             }}
 
             /* ==========================================
-               🎨 กรอบ 2 ฝั่ง 2 โทนสีสวยงาม
+               🎨 กรอบ 2 ฝั่ง 2 โทนสี (แก้ไขรองรับ [data-testid="stColumn"])
                ========================================== */
 
-            /* 📁 คอลัมน์ซ้าย (อัปโหลดเอกสาร) - โทนเขียวมิ้นต์นุ่มนวล */
+            /* 📁 คอลัมน์ซ้าย (อัปโหลดเอกสาร) - โทนเขียวมิ้นต์ */
+            [data-testid="stColumn"]:nth-child(1),
             [data-testid="column"]:nth-child(1) {{
-                background: linear-gradient(180deg, #f4fbf7 0%, #ffffff 100%);
-                border: 2px solid #a8e6cf;
-                border-radius: 20px;
-                padding: 24px 22px;
-                box-shadow: 0 8px 25px rgba(0, 102, 51, 0.06);
-                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+                background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%) !important;
+                border: 2px solid #10b981 !important;
+                border-radius: 20px !important;
+                padding: 24px 22px !important;
+                box-shadow: 0 10px 25px rgba(16, 185, 129, 0.12) !important;
+                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both !important;
             }}
 
-            /* 🤖 คอลัมน์ขวา (ผลวิเคราะห์ AI) - โทนฟ้าเทอร์ควอยซ์ไฮเทค */
+            /* 🤖 คอลัมน์ขวา (ผลวิเคราะห์ AI) - โทนฟ้าเทอร์ควอยซ์ */
+            [data-testid="stColumn"]:nth-child(2),
             [data-testid="column"]:nth-child(2) {{
-                background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
-                border: 2px solid #7dd3fc;
-                border-radius: 20px;
-                padding: 24px 22px;
-                box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08);
-                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
+                background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%) !important;
+                border: 2px solid #0284c7 !important;
+                border-radius: 20px !important;
+                padding: 24px 22px !important;
+                box-shadow: 0 10px 25px rgba(2, 132, 199, 0.12) !important;
+                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both !important;
             }}
 
             h2, h3 {{
@@ -189,7 +191,7 @@ def set_background(image_file):
 
             [data-testid="stFileUploadDropzone"] {{
                 background-color: #ffffff;
-                border: 2px dashed #00b09b;
+                border: 2px dashed #10b981;
                 border-radius: 15px;
                 padding: 20px;
                 transition: all 0.3s ease;
