@@ -53,9 +53,19 @@ def set_background(image_file):
                 font-family: 'Kanit', sans-serif !important;
             }}
 
+            /* ==========================================
+               ✨ KEYFRAME ANIMATIONS
+               ========================================== */
+            
             @keyframes fadeInUpSmooth {{
-                0% {{ opacity: 0; transform: translateY(22px); }}
-                100% {{ opacity: 1; transform: translateY(0); }}
+                0% {{
+                    opacity: 0;
+                    transform: translateY(22px);
+                }}
+                100% {{
+                    opacity: 1;
+                    transform: translateY(0);
+                }}
             }}
 
             @keyframes shimmerEffect {{
@@ -69,10 +79,19 @@ def set_background(image_file):
             }}
 
             @keyframes alertPulse {{
-                0%, 100% {{ box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2); transform: scale(1); }}
-                50% {{ box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4); transform: scale(1.008); }}
+                0%, 100% {{
+                    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
+                    transform: scale(1);
+                }}
+                50% {{
+                    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+                    transform: scale(1.008);
+                }}
             }}
 
+            /* ==========================================
+               📌 HEADER BOX
+               ========================================== */
             .header-box {{
                 background-color: #f4fbf7;
                 border: 2px solid #bce1ce;
@@ -121,6 +140,11 @@ def set_background(image_file):
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
             }}
 
+            /* ==========================================
+               🎨 กรอบ 2 ฝั่ง (ยกเว้น Sidebar)
+               ========================================== */
+
+            /* 📁 คอลัมน์ซ้าย (อัปโหลดเอกสาร) */
             [data-testid="stColumn"]:not([data-testid="stSidebar"] *):nth-child(1),
             div[data-testid="column"]:not([data-testid="stSidebar"] *):nth-child(1) {{
                 background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%) !important;
@@ -131,6 +155,7 @@ def set_background(image_file):
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both !important;
             }}
 
+            /* 🤖 คอลัมน์ขวา (ผลวิเคราะห์ AI) */
             [data-testid="stColumn"]:not([data-testid="stSidebar"] *):nth-child(2),
             div[data-testid="column"]:not([data-testid="stSidebar"] *):nth-child(2) {{
                 background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%) !important;
@@ -141,7 +166,10 @@ def set_background(image_file):
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both !important;
             }}
 
-            h2, h3 {{ color: #006633 !important; font-weight: 600; }}
+            h2, h3 {{
+                color: #006633 !important;
+                font-weight: 600;
+            }}
 
             .stButton>button, .stDownloadButton>button {{
                 background: linear-gradient(135deg, #006633, #00b09b);
@@ -168,7 +196,12 @@ def set_background(image_file):
                 padding: 20px;
                 transition: all 0.3s ease;
             }}
+            [data-testid="stFileUploadDropzone"]:hover {{
+                background-color: #e8f7f0;
+                border-color: #006633;
+            }}
 
+            /* 🔔 ตกแต่งกล่องสถานะประมวลผล st.status */
             [data-testid="stStatusWidget"] {{
                 border: 2px solid #ffa726 !important;
                 background-color: #fffde7 !important;
@@ -176,6 +209,12 @@ def set_background(image_file):
                 padding: 10px !important;
                 box-shadow: 0 6px 20px rgba(255, 167, 38, 0.15) !important;
                 animation: fadeInUpSmooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+            }}
+            [data-testid="stStatusWidget"] summary label, 
+            [data-testid="stStatusWidget"] summary span {{
+                font-size: 19px !important;
+                font-weight: 600 !important;
+                color: #e65100 !important;
             }}
 
             #MainMenu {{visibility: hidden;}}
