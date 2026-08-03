@@ -54,14 +54,13 @@ def set_background(image_file):
             }}
 
             /* ==========================================
-               ✨ KEYFRAME ANIMATIONS (ปรับให้นุ่มนวล ช้าลง)
+               ✨ KEYFRAME ANIMATIONS (ลอยเข้าแบบสมูทๆ)
                ========================================== */
             
-            /* 1. Animation ค่อยๆ ลอยขึ้นอย่างนุ่มนวล (ระยะเคลื่อนตัว 20px) */
             @keyframes fadeInUpSmooth {{
                 0% {{
                     opacity: 0;
-                    transform: translateY(20px);
+                    transform: translateY(22px);
                 }}
                 100% {{
                     opacity: 1;
@@ -69,19 +68,16 @@ def set_background(image_file):
                 }}
             }}
 
-            /* 2. Animation แสงกวาดผ่านตัวอักษร (Shimmer) */
             @keyframes shimmerEffect {{
                 0% {{ background-position: -200% center; }}
                 100% {{ background-position: 200% center; }}
             }}
 
-            /* 3. Animation ตัวหนังสือเรืองแสงวิ้งๆ (Glow Pulse) */
             @keyframes glowPulse {{
                 0%, 100% {{ filter: drop-shadow(0 0 2px rgba(0, 102, 51, 0.2)); }}
                 50% {{ filter: drop-shadow(0 0 12px rgba(150, 201, 61, 0.8)); }}
             }}
 
-            /* 4. Animation เปล่งออร่าแบบนุ่มนวลสำหรับกล่องเตือน */
             @keyframes alertPulse {{
                 0%, 100% {{
                     box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
@@ -94,10 +90,8 @@ def set_background(image_file):
             }}
 
             /* ==========================================
-               📌 กำหนดเวลาหน่วงและระยะเวลา (Duration & Stagger Delay)
+               📌 HEADER BOX
                ========================================== */
-
-            /* Header Box ลอยเข้ามาเป็นอันดับแรก (1.2s) */
             .header-box {{
                 background-color: #f4fbf7;
                 border: 2px solid #bce1ce;
@@ -109,7 +103,6 @@ def set_background(image_file):
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
             }}
 
-            /* หัวข้อใหญ่ตัวหนังสือวิ้งๆ */
             h1 {{
                 background: linear-gradient(
                     110deg, 
@@ -132,7 +125,6 @@ def set_background(image_file):
                 line-height: 1.4;
             }}
 
-            /* Subtitle ทยอยลอยตามเข้ามา (หน่วงเวลา 0.35s) */
             .subtitle-text {{
                 text-align: center;
                 font-size: 16px;
@@ -145,22 +137,36 @@ def set_background(image_file):
                 border: 1px solid #e0f2e9;
                 box-shadow: 0 4px 10px rgba(0, 102, 51, 0.05);
                 font-weight: 400;
-                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
             }}
 
-            /* คอลัมน์ซ้าย (อัปโหลด) ทยอยลอยเข้ามา (หน่วงเวลา 0.6s) */
+            /* ==========================================
+               🎨 กรอบ 2 ฝั่ง 2 โทนสีสวยงาม
+               ========================================== */
+
+            /* 📁 คอลัมน์ซ้าย (อัปโหลดเอกสาร) - โทนเขียวมิ้นต์นุ่มนวล */
             [data-testid="column"]:nth-child(1) {{
-                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+                background: linear-gradient(180deg, #f4fbf7 0%, #ffffff 100%);
+                border: 2px solid #a8e6cf;
+                border-radius: 20px;
+                padding: 24px 22px;
+                box-shadow: 0 8px 25px rgba(0, 102, 51, 0.06);
+                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
             }}
 
-            /* คอลัมน์ขวา (ผลวิเคราะห์ AI) ทยอยลอยเข้ามา (หน่วงเวลา 0.85s) */
+            /* 🤖 คอลัมน์ขวา (ผลวิเคราะห์ AI) - โทนฟ้าเทอร์ควอยซ์ไฮเทค */
             [data-testid="column"]:nth-child(2) {{
-                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+                background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+                border: 2px solid #7dd3fc;
+                border-radius: 20px;
+                padding: 24px 22px;
+                box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08);
+                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
             }}
 
             h2, h3 {{
                 color: #006633 !important;
-                font-weight: 500;
+                font-weight: 600;
             }}
 
             .stButton>button, .stDownloadButton>button {{
@@ -182,7 +188,7 @@ def set_background(image_file):
             }}
 
             [data-testid="stFileUploadDropzone"] {{
-                background-color: #f4fbf7;
+                background-color: #ffffff;
                 border: 2px dashed #00b09b;
                 border-radius: 15px;
                 padding: 20px;
@@ -193,7 +199,7 @@ def set_background(image_file):
                 border-color: #006633;
             }}
 
-            /* 🔔 ตกแต่งกล่องสถานะประมวลผล st.status ให้ใหญ่และเด่นชัด */
+            /* 🔔 ตกแต่งกล่องสถานะประมวลผล st.status */
             [data-testid="stStatusWidget"] {{
                 border: 2px solid #ffa726 !important;
                 background-color: #fffde7 !important;
