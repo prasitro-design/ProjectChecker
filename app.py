@@ -296,12 +296,12 @@ with col2:
             
             result = "" 
             
-            with st.status("🤖 AI กำลังอ่านและประเมินคะแนนเอกสาร...", expanded=True) as status:
+            with st.status("🤖 AI กำลังอ่านและตรวจสอบเอกสารโครงการ ระบบ AI ใช้เวลาประมาณ 1 นาที กรุณารอสักครู่...", expanded=True) as status:
                 st.write("⏳ กำลังตรวจสอบโครงสร้างตามแบบฟอร์ม...")
                 time.sleep(1.5)
                 st.write("🔍 กำลังประเมินความสมเหตุสมผลและหาคำผิด...")
                 time.sleep(1)
-                st.write("💯 กำลังคำนวณคะแนนภาพรวม (ใช้เวลาประมาณ 1 นาที)...")
+                st.write("💯 กำลังคำนวณคะแนนภาพรวม...")
                 
                 try:
                     result = analyze_document(document_text)
