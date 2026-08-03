@@ -144,7 +144,7 @@ st.markdown("""
 # 3. ตั้งค่า API Key ของ Gemini
 # ==========================================
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-model = genai.GenerativeModel('gemini-3.6-flash')
+model = genai.GenerativeModel('gemini-3.5-flash')
 
 # ==========================================
 # 4. ฟังก์ชันสำหรับอ่านไฟล์ PDF ด้วย PyMuPDF
