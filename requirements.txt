@@ -1,3 +1,6 @@
 streamlit
 pymupdf
 google-generativeai
+gspread
+google-auth
+pytz
