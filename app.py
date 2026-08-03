@@ -52,6 +52,52 @@ def set_background(image_file):
             html, body, [class*="css"] {{
                 font-family: 'Kanit', sans-serif !important;
             }}
+
+            /* ==========================================
+               ✨ KEYFRAME ANIMATIONS (เอฟเฟกต์เคลื่อนไหว)
+               ========================================== */
+            
+            /* 1. Animation ค่อยๆ ลอยขึ้นมาจากด้านล่างพร้อมจางปรากฏเข้ามา */
+            @keyframes fadeInUp {{
+                0% {{
+                    opacity: 0;
+                    transform: translateY(30px);
+                }}
+                100% {{
+                    opacity: 1;
+                    transform: translateY(0);
+                }}
+            }}
+
+            /* 2. Animation แสงกวาดผ่านตัวอักษร (Shimmer) */
+            @keyframes shimmerEffect {{
+                0% {{ background-position: -200% center; }}
+                100% {{ background-position: 200% center; }}
+            }}
+
+            /* 3. Animation ตัวหนังสือเรืองแสงวิ้งๆ (Glow Pulse) */
+            @keyframes glowPulse {{
+                0%, 100% {{ filter: drop-shadow(0 0 2px rgba(0, 102, 51, 0.2)); }}
+                50% {{ filter: drop-shadow(0 0 12px rgba(150, 201, 61, 0.8)); }}
+            }}
+
+            /* 4. Animation เปล่งออร่าสำหรับกล่องเตือน */
+            @keyframes alertPulse {{
+                0%, 100% {{
+                    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
+                    transform: scale(1);
+                }}
+                50% {{
+                    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.45);
+                    transform: scale(1.01);
+                }}
+            }}
+
+            /* ==========================================
+               📌 นำ ANIMATION ไปประยุกต์ใช้กับส่วนต่าง ๆ
+               ========================================== */
+
+            /* Header Box ลอยเข้ามาเป็นอย่างแรก */
             .header-box {{
                 background-color: #f4fbf7;
                 border: 2px solid #bce1ce;
@@ -60,29 +106,10 @@ def set_background(image_file):
                 margin-bottom: 30px;
                 box-shadow: 0 8px 20px rgba(0, 102, 51, 0.08);
                 text-align: center;
+                animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
             }}
 
-            /* ✨ Animation แสงกวาดผ่านตัวอักษร (Shimmer) ✨ */
-            @keyframes shimmerEffect {{
-                0% {{
-                    background-position: -200% center;
-                }}
-                100% {{
-                    background-position: 200% center;
-                }}
-            }}
-
-            /* ✨ Animation ตัวหนังสือเรืองแสงวิ้งๆ (Glow Pulse) ✨ */
-            @keyframes glowPulse {{
-                0%, 100% {{
-                    filter: drop-shadow(0 0 2px rgba(0, 102, 51, 0.2));
-                }}
-                50% {{
-                    filter: drop-shadow(0 0 12px rgba(150, 201, 61, 0.8));
-                }}
-            }}
-
-            /* 📌 กำหนดสไตล์หัวข้อใหญ่ให้มีแสงวิ้งๆ */
+            /* หัวข้อใหญ่ตัวหนังสือวิ้งๆ + ลอยเข้ามา */
             h1 {{
                 background: linear-gradient(
                     110deg, 
@@ -105,6 +132,7 @@ def set_background(image_file):
                 line-height: 1.4;
             }}
 
+            /* Subtitle ทยอยลอยตามเข้ามา (หน่วงเวลา 0.2s) */
             .subtitle-text {{
                 text-align: center;
                 font-size: 16px;
@@ -117,11 +145,24 @@ def set_background(image_file):
                 border: 1px solid #e0f2e9;
                 box-shadow: 0 4px 10px rgba(0, 102, 51, 0.05);
                 font-weight: 400;
+                animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
             }}
+
+            /* คอลัมน์ซ้าย (อัปโหลด) ทยอยลอยเข้ามา (หน่วงเวลา 0.35s) */
+            [data-testid="column"]:nth-child(1) {{
+                animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
+            }}
+
+            /* คอลัมน์ขวา (ผลวิเคราะห์ AI) ทยอยลอยเข้ามา (หน่วงเวลา 0.5s) */
+            [data-testid="column"]:nth-child(2) {{
+                animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both;
+            }}
+
             h2, h3 {{
                 color: #006633 !important;
                 font-weight: 500;
             }}
+
             .stButton>button, .stDownloadButton>button {{
                 background: linear-gradient(135deg, #006633, #00b09b);
                 color: white !important;
@@ -139,6 +180,7 @@ def set_background(image_file):
                 box-shadow: 0 8px 25px rgba(0, 102, 51, 0.45);
                 color: white;
             }}
+
             [data-testid="stFileUploadDropzone"] {{
                 background-color: #f4fbf7;
                 border: 2px dashed #00b09b;
@@ -150,6 +192,23 @@ def set_background(image_file):
                 background-color: #e8f7f0;
                 border-color: #006633;
             }}
+
+            /* 🔔 ตกแต่งกล่องสถานะประมวลผล st.status ให้ใหญ่และเด่นชัด */
+            [data-testid="stStatusWidget"] {{
+                border: 2px solid #ffa726 !important;
+                background-color: #fffde7 !important;
+                border-radius: 16px !important;
+                padding: 10px !important;
+                box-shadow: 0 6px 20px rgba(255, 167, 38, 0.15) !important;
+                animation: fadeInUp 0.5s ease-out both;
+            }}
+            [data-testid="stStatusWidget"] summary label, 
+            [data-testid="stStatusWidget"] summary span {{
+                font-size: 19px !important;
+                font-weight: 600 !important;
+                color: #e65100 !important;
+            }}
+
             #MainMenu {{visibility: hidden;}}
             footer {{visibility: hidden;}}
             header {{visibility: hidden;}}
