@@ -137,7 +137,7 @@ def set_background(image_file):
                 border: 1px solid #e0f2e9;
                 box-shadow: 0 4px 10px rgba(0, 102, 51, 0.05);
                 font-weight: 400;
-                animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+                animation: fadeInUpSmooth 1.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
             }}
 
             /* ==========================================
