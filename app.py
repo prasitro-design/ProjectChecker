@@ -132,7 +132,7 @@ def set_background(image_file):
                 line-height: 1.4;
             }}
 
-            /* Subtitle ทยอยลอยตามเข้ามา (หน่วงเวลา 0.2s) */
+            /* Subtitle ทยอยลอยตามเข้ามา (หน่วงเวลา 0.5s) */
             .subtitle-text {{
                 text-align: center;
                 font-size: 16px;
@@ -148,12 +148,12 @@ def set_background(image_file):
                 animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
             }}
 
-            /* คอลัมน์ซ้าย (อัปโหลด) ทยอยลอยเข้ามา (หน่วงเวลา 0.35s) */
+            /* คอลัมน์ซ้าย (อัปโหลด) ทยอยลอยเข้ามา (หน่วงเวลา 1 s) */
             [data-testid="column"]:nth-child(1) {{
                 animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
             }}
 
-            /* คอลัมน์ขวา (ผลวิเคราะห์ AI) ทยอยลอยเข้ามา (หน่วงเวลา 0.5s) */
+            /* คอลัมน์ขวา (ผลวิเคราะห์ AI) ทยอยลอยเข้ามา (หน่วงเวลา 1.5s) */
             [data-testid="column"]:nth-child(2) {{
                 animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both;
             }}
