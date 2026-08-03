@@ -388,7 +388,7 @@ st.markdown("---")
         """
         <div style="text-align: center; padding: 12px; background-color: #ffffff; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
             <p style="margin: 0 0 6px 0; font-size: 13px; color: #006633; font-weight: 600;">👁️ สถิติผู้เข้าชมเว็บไซต์</p>
-            <img src="https://counter11.optistats.ovh/private/freecounterstat.php?c=f45ukslenq5xwu1j492htlknlnqmuqtm" border="0" title="free web counter" alt="free web counter"/>
+            <a href="https://www.freecounterstat.com" title="free web counter"><img src="https://counter11.optistats.ovh/private/freecounterstat.php?c=f45ukslenq5xwu1j492htlknlnqmuqtm" border="0" title="free web counter" alt="free web counter"></a>
         </div>
         """,
         unsafe_allow_html=True
