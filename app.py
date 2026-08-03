@@ -260,7 +260,7 @@ with st.sidebar:
     st.markdown("### 📌 คำแนะนำการใช้งาน")
     st.info("""
     **ขั้นตอนการตรวจเอกสาร:**
-    1. บันทึกชื่อไฟล์เป็นชื่อโครงการ โดยบันทึกเป็น **.pdf** 
+    1. ชื่อไฟล์เป็นชื่อโครงการ โดยบันทึกเป็น **.pdf** 
        *(ต้องเป็นไฟล์ที่แปลงจาก MS Word เท่านั้น!!!)*
     2. อัปโหลดไฟล์และกดยอมรับเงื่อนไข
     3. กดปุ่ม **เริ่มให้ AI ตรวจสอบเอกสารโครงการ**
@@ -301,7 +301,13 @@ col1, col2 = st.columns([1, 1.2], gap="large")
 with col1:
     st.markdown("### 📁 1. อัปโหลดเอกสาร")
     uploaded_file = st.file_uploader("ลากไฟล์ PDF มาวางที่นี่", type="pdf", label_visibility="collapsed")
-    
+    # 📌 ส่วนที่เพิ่มเข้ามา: แสดงข้อความตัวแดงเตือนตั้งชื่อไฟล์
+    st.markdown(
+        "<p style='color: #e74c3c; font-size: 14px; font-weight: 500; margin-top: 8px; margin-bottom: 15px;'>"
+        "🔴 <b>โปรดตรวจสอบว่า ได้ตั้งชื่อไฟล์เป็นชื่อโครงการแล้วหรือยัง?</b>"
+        "</p>", 
+        unsafe_allow_html=True
+    )
     if uploaded_file is not None:
         st.toast("✅ อัปโหลดไฟล์สำเร็จ! พร้อมให้ AI ตรวจสอบแล้ว", icon="🎉")
         st.success("✅ อัปโหลดไฟล์สำเร็จ!")
