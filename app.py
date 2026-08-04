@@ -393,64 +393,15 @@ with st.sidebar:
             st.image("logo.png", use_container_width=True) 
         except FileNotFoundError:
             pass
-    st.markdown("### 📌 คำแนะนำการใช้งาน")     
-# 📌 การ์ดแสดงขั้นตอนแบบ Visual (Process Stepper)
-    st.markdown("""
-    <div style="font-family: 'Kanit', sans-serif; margin-top: 10px;">
-        
-        <!-- ขั้นตอนที่ 1 -->
-        <div style="display: flex; margin-bottom: 15px; position: relative;">
-            <!-- เส้นเชื่อม -->
-            <div style="position: absolute; left: 15px; top: 32px; bottom: -20px; width: 2px; background-color: #bce1ce; z-index: 0;"></div>
-            <!-- วงกลมตัวเลข -->
-            <div style="background: linear-gradient(135deg, #006633, #00b09b); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(0,102,51,0.2);">
-                1
-            </div>
-            <!-- กล่องข้อความ -->
-            <div style="margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e0f2e9; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-                <div style="font-weight: 600; color: #006633; font-size: 14px; margin-bottom: 2px;">เตรียมเอกสาร</div>
-                <div style="font-size: 12.5px; color: #555; line-height: 1.4;">ดาวน์โหลดแบบฟอร์ม Word และพิมพ์รายละเอียดให้ครบถ้วน</div>
-            </div>
-        </div>
-        
-        <!-- ขั้นตอนที่ 2 -->
-        <div style="display: flex; margin-bottom: 15px; position: relative;">
-            <div style="position: absolute; left: 15px; top: 32px; bottom: -20px; width: 2px; background-color: #bce1ce; z-index: 0;"></div>
-            <div style="background: linear-gradient(135deg, #006633, #00b09b); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(0,102,51,0.2);">
-                2
-            </div>
-            <div style="margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e0f2e9; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-                <div style="font-weight: 600; color: #006633; font-size: 14px; margin-bottom: 2px;">บันทึกเป็น PDF</div>
-                <div style="font-size: 12.5px; color: #555; line-height: 1.4;">Save as เป็นไฟล์ <b>.pdf</b> เท่านั้น (ห้ามใช้ไฟล์สแกนรูปภาพ)</div>
-            </div>
-        </div>
-
-        <!-- ขั้นตอนที่ 3 -->
-        <div style="display: flex; margin-bottom: 15px; position: relative;">
-            <div style="position: absolute; left: 15px; top: 32px; bottom: -20px; width: 2px; background-color: #e0f2fe; z-index: 0;"></div>
-            <div style="background: linear-gradient(135deg, #0ea5e9, #38bdf8); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(14,165,233,0.2);">
-                3
-            </div>
-            <div style="margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e0f2fe; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-                <div style="font-weight: 600; color: #0284c7; font-size: 14px; margin-bottom: 2px;">อัปโหลดและยืนยัน</div>
-                <div style="font-size: 12.5px; color: #555; line-height: 1.4;">ลากไฟล์มาวางด้านขวา กดยอมรับเงื่อนไข 🛡️ และกดปุ่มเริ่ม</div>
-            </div>
-        </div>
-
-        <!-- ขั้นตอนที่ 4 (ไม่มีเส้นเชื่อมต่อแล้ว) -->
-        <div style="display: flex; margin-bottom: 10px; position: relative;">
-            <div style="background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(245,158,11,0.2);">
-                4
-            </div>
-            <div style="margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #fef3c7; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-                <div style="font-weight: 600; color: #d97706; font-size: 14px; margin-bottom: 2px;">รอรับผลวิเคราะห์</div>
-                <div style="font-size: 12.5px; color: #555; line-height: 1.4;">AI จะวิเคราะห์และสรุปคะแนนให้ภายในเวลาไม่เกิน 1 นาที 🚀</div>
-            </div>
-        </div>
-
-    </div>
-    """, unsafe_allow_html=True)
-    
+st.markdown("### 📌 คำแนะนำการใช้งาน")
+    st.info("""
+    **ขั้นตอนการตรวจเอกสาร:**
+    1. ดาวน์โหลดแบบฟอร์ม Word ไปพิมพ์รายละเอียด
+    2. บันทึกไฟล์เป็นนามสกุล **.pdf** 
+       *(ต้องเป็นไฟล์ที่แปลงจาก MS Word เท่านั้น!)*
+    3. อัปโหลดไฟล์และกดยอมรับเงื่อนไข
+    4. กดปุ่ม **เริ่มให้ AI ตรวจสอบและให้คะแนน**
+    """)
     st.markdown("---")
     st.markdown("### 📥 ดาวน์โหลดแบบฟอร์ม")
     # ปุ่มดาวน์โหลดไฟล์ Word
