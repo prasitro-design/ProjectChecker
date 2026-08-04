@@ -1,3 +1,5 @@
+import pandas as pd
+import math # เพิ่มไว้ด้านบนสุดของไฟล์ร่วมกับ import อื่นๆ สำหรับปัดเศษเวลา
 import streamlit as st
 import fitz  # PyMuPDF
 import google.generativeai as genai
@@ -508,39 +510,81 @@ with col1:
 # 📊 คอลัมน์ที่ 2
 # ==========================================
 with col2:
-    # 📊 แผงสถิติ Dashboard (Quick Key Metrics) - ใช้ () เพื่อป้องกันปัญหาเว้นวรรค
+    # --- 1. ดึงข้อมูลจาก Google Sheets ของคุณ ---
+    try:
+        # ใช้ Sheet ID จากลิงก์ที่คุณส่งมา และแปลงเป็น URL สำหรับดึงค่า CSV
+        sheet_id = "1jQVFbiKKQjxJVk8HHwLVzNlNDWyA2CPQSnNsVAz3aNk"
+        csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid=0"
+        
+        # อ่านข้อมูลด้วย Pandas
+        df = pd.read_csv(csv_url)
+        
+        # 📌 [สำคัญ] เปลี่ยนชื่อตัวแปรในเครื่องหมายคำพูดด้านล่าง ให้ตรงกับ "หัวคอลัมน์" ใน Sheet ของคุณ
+        col_name_score = "คะแนนรวม" # เปลี่ยนเป็นชื่อคอลัมน์ที่เก็บคะแนน
+        col_name_time = "เวลาที่ใช้(วินาที)" # เปลี่ยนเป็นชื่อคอลัมน์ที่เก็บเวลา
+        
+        # คำนวณจำนวนโครงการทั้งหมด
+        total_projects = len(df)
+        
+        # คำนวณสัดส่วนคะแนน (เช็คก่อนว่ามีคอลัมน์นี้จริงๆ)
+        if col_name_score in df.columns:
+            # แปลงเป็นตัวเลขเผื่อว่าข้อมูลมาเป็นข้อความ
+            df[col_name_score] = pd.to_numeric(df[col_name_score], errors='coerce') 
+            score_90_100 = len(df[df[col_name_score] >= 90])
+            score_80_89 = len(df[(df[col_name_score] >= 80) & (df[col_name_score] < 90)])
+        else:
+            score_90_100 = 0
+            score_80_89 = 0
+            
+        # คำนวณเวลาเฉลี่ย (เช็คก่อนว่ามีคอลัมน์นี้จริงๆ)
+        if col_name_time in df.columns:
+            df[col_name_time] = pd.to_numeric(df[col_name_time], errors='coerce')
+            # หาค่าเฉลี่ยและปัดเศษขึ้น
+            avg_time = math.ceil(df[col_name_time].mean()) if not pd.isna(df[col_name_time].mean()) else 0
+        else:
+            avg_time = 0
+            
+    except Exception as e:
+        # กรณีที่ยังไม่ได้เปิดแชร์ลิงก์ หรือดึงข้อมูลไม่สำเร็จ ให้เป็น 0 ไว้ก่อน
+        total_projects = 0
+        score_90_100 = 0
+        score_80_89 = 0
+        avg_time = 0
+        # st.warning(f"ไม่สามารถเชื่อมต่อฐานข้อมูลได้: {e}") # สามารถลบเครื่องหมาย # ออกเพื่อดู Error ได้
+
+    # --- 2. แผงสถิติ Dashboard (แสดงผลจากตัวแปร) ---
     dashboard_html = (
-        "<div style='display: flex; gap: 15px; margin-bottom: 25px; font-family: \"Kanit\", sans-serif;'>"
+        f"<div style='display: flex; gap: 15px; margin-bottom: 25px; font-family: \"Kanit\", sans-serif;'>"
         
-        "<!-- ส่วนที่ 1: ตรวจไปแล้ว -->"
-        "<div style='flex: 1; background: #ffffff; border-left: 5px solid #0ea5e9; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;'>"
-        "<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px;'>📊 ตรวจไปแล้วทั้งหมด</div>"
-        "<div style='font-size: 22px; color: #0f172a; font-weight: 700;'>1,250 <span style='font-size: 12px; color: #94a3b8; font-weight: 400;'>โครงการ</span></div>"
-        "</div>"
+        f"<!-- ส่วนที่ 1: ตรวจไปแล้ว -->"
+        f"<div style='flex: 1; background: #ffffff; border-left: 5px solid #0ea5e9; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;'>"
+        f"<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px;'>📊 ตรวจไปแล้วทั้งหมด</div>"
+        f"<div style='font-size: 22px; color: #0f172a; font-weight: 700;'>{total_projects:,} <span style='font-size: 12px; color: #94a3b8; font-weight: 400;'>โครงการ</span></div>"
+        f"</div>"
         
-        "<!-- ส่วนที่ 2: เวลาเฉลี่ย -->"
-        "<div style='flex: 1; background: #ffffff; border-left: 5px solid #10b981; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;'>"
-        "<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px;'>⏱️ เวลาตรวจเฉลี่ย</div>"
-        "<div style='font-size: 22px; color: #0f172a; font-weight: 700;'>~45 <span style='font-size: 12px; color: #94a3b8; font-weight: 400;'>วินาที</span></div>"
-        "</div>"
+        f"<!-- ส่วนที่ 2: เวลาเฉลี่ย -->"
+        f"<div style='flex: 1; background: #ffffff; border-left: 5px solid #10b981; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;'>"
+        f"<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px;'>⏱️ เวลาตรวจเฉลี่ย</div>"
+        f"<div style='font-size: 22px; color: #0f172a; font-weight: 700;'>~{avg_time} <span style='font-size: 12px; color: #94a3b8; font-weight: 400;'>วินาที</span></div>"
+        f"</div>"
         
-        "<!-- ส่วนที่ 3: ช่วงคะแนน -->"
-        "<div style='flex: 1.2; background: #ffffff; border-left: 5px solid #f59e0b; border-radius: 10px; padding: 10px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>"
-        "<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px; text-align: center;'>🎯 สัดส่วนคะแนนคุณภาพ</div>"
-        "<div style='display: flex; justify-content: space-around; margin-top: 5px;'>"
-        "<div style='text-align: center;'>"
-        "<div style='font-size: 18px; color: #166534; font-weight: 700;'>120</div>"
-        "<div style='font-size: 11px; color: #94a3b8;'>90-100 คะแนน</div>"
-        "</div>"
-        "<div style='width: 1px; background-color: #e2e8f0; margin: 0 5px;'></div>"
-        "<div style='text-align: center;'>"
-        "<div style='font-size: 18px; color: #0284c7; font-weight: 700;'>345</div>"
-        "<div style='font-size: 11px; color: #94a3b8;'>80-89 คะแนน</div>"
-        "</div>"
-        "</div>"
-        "</div>"
+        f"<!-- ส่วนที่ 3: ช่วงคะแนน -->"
+        f"<div style='flex: 1.2; background: #ffffff; border-left: 5px solid #f59e0b; border-radius: 10px; padding: 10px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>"
+        f"<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px; text-align: center;'>🎯 สัดส่วนคะแนนคุณภาพ</div>"
+        f"<div style='display: flex; justify-content: space-around; margin-top: 5px;'>"
+        f"<div style='text-align: center;'>"
+        f"<div style='font-size: 18px; color: #166534; font-weight: 700;'>{score_90_100:,}</div>"
+        f"<div style='font-size: 11px; color: #94a3b8;'>90-100 คะแนน</div>"
+        f"</div>"
+        f"<div style='width: 1px; background-color: #e2e8f0; margin: 0 5px;'></div>"
+        f"<div style='text-align: center;'>"
+        f"<div style='font-size: 18px; color: #0284c7; font-weight: 700;'>{score_80_89:,}</div>"
+        f"<div style='font-size: 11px; color: #94a3b8;'>80-89 คะแนน</div>"
+        f"</div>"
+        f"</div>"
+        f"</div>"
         
-        "</div>"
+        f"</div>"
     )
     
     st.markdown(dashboard_html, unsafe_allow_html=True)
