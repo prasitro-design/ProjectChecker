@@ -388,50 +388,49 @@ def log_to_google_sheets(filename, result_text):
 # 5. การจัด Layout แถบด้านข้าง (Sidebar)
 # ==========================================
 with st.sidebar:
-    # 1. คำสั่ง Python ตรงนี้ต้องย่อหน้าให้ตรงกัน
+    col_left, col_mid, col_right = st.columns([1, 2, 1])
+    with col_mid:
+        try:
+            st.image("logo.png", use_container_width=True) 
+        except FileNotFoundError:
+            pass
+            
     st.markdown("### 📌 คำแนะนำการใช้งาน")
     
-    # 2. คำสั่ง st.markdown ต้องย่อหน้าตรงกับบรรทัดบน
-    st.markdown("""
-<div style="font-family: 'Kanit', sans-serif; margin-top: 10px;">
+    # 📌 การ์ดแสดงขั้นตอนแบบ Visual (ใช้เทคนิคต่อ String เพื่อป้องกันปัญหาเว้นวรรค)
+    step_html = (
+        "<div style='font-family: \"Kanit\", sans-serif; margin-top: 10px;'>"
+        
+        "<!-- ขั้นตอนที่ 1 -->"
+        "<div style='display: flex; margin-bottom: 15px; position: relative;'>"
+        "<div style='position: absolute; left: 15px; top: 32px; bottom: -20px; width: 2px; background-color: #bce1ce; z-index: 0;'></div>"
+        "<div style='background: linear-gradient(135deg, #006633, #00b09b); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(0,102,51,0.2);'>1</div>"
+        "<div style='margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e0f2e9; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);'>"
+        "<div style='font-weight: 600; color: #006633; font-size: 14px; margin-bottom: 2px;'>บันทึกเป็น PDF</div>"
+        "<div style='font-size: 12.5px; color: #555; line-height: 1.4;'>บันทึกชื่อไฟล์เป็นชื่อโครงการ (ต้องเป็นไฟล์ที่แปลงจาก <b>MS Word</b> เท่านั้น!)</div>"
+        "</div></div>"
+        
+        "<!-- ขั้นตอนที่ 2 -->"
+        "<div style='display: flex; margin-bottom: 15px; position: relative;'>"
+        "<div style='position: absolute; left: 15px; top: 32px; bottom: -20px; width: 2px; background-color: #e0f2fe; z-index: 0;'></div>"
+        "<div style='background: linear-gradient(135deg, #006633, #00b09b); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(0,102,51,0.2);'>2</div>"
+        "<div style='margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e0f2e9; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);'>"
+        "<div style='font-weight: 600; color: #006633; font-size: 14px; margin-bottom: 2px;'>อัปโหลดและยืนยัน</div>"
+        "<div style='font-size: 12.5px; color: #555; line-height: 1.4;'>ลากไฟล์มาวางด้านขวา และติ๊ก 🛡️ <b>ยอมรับเงื่อนไข</b></div>"
+        "</div></div>"
+        
+        "<!-- ขั้นตอนที่ 3 -->"
+        "<div style='display: flex; margin-bottom: 10px; position: relative;'>"
+        "<div style='background: linear-gradient(135deg, #0ea5e9, #38bdf8); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(14,165,233,0.2);'>3</div>"
+        "<div style='margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e0f2fe; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);'>"
+        "<div style='font-weight: 600; color: #0284c7; font-size: 14px; margin-bottom: 2px;'>เริ่มการตรวจสอบ</div>"
+        "<div style='font-size: 12.5px; color: #555; line-height: 1.4;'>กดปุ่ม <b>เริ่มให้ AI ตรวจสอบเอกสาร</b> และรอรับผลวิเคราะห์ 🚀</div>"
+        "</div></div>"
+        
+        "</div>"
+    )
     
-    <!-- 3. ส่วนโค้ด HTML ด้านในนี้ ดันชิดขอบซ้ายสุดได้เลยครับ -->
-    <div style="display: flex; margin-bottom: 15px; position: relative;">
-        <div style="position: absolute; left: 15px; top: 32px; bottom: -20px; width: 2px; background-color: #bce1ce; z-index: 0;"></div>
-        <div style="background: linear-gradient(135deg, #006633, #00b09b); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(0,102,51,0.2);">
-            1
-        </div>
-        <div style="margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e0f2e9; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-            <div style="font-weight: 600; color: #006633; font-size: 14px; margin-bottom: 2px;">บันทึกเป็น PDF</div>
-            <div style="font-size: 12.5px; color: #555; line-height: 1.4;">บันทึกชื่อไฟล์เป็นชื่อโครงการ (ต้องเป็นไฟล์ที่แปลงจาก <b>MS Word</b> เท่านั้น!)</div>
-        </div>
-    </div>
-    
-    <!-- ขั้นตอนที่ 2 -->
-    <div style="display: flex; margin-bottom: 15px; position: relative;">
-        <div style="position: absolute; left: 15px; top: 32px; bottom: -20px; width: 2px; background-color: #e0f2fe; z-index: 0;"></div>
-        <div style="background: linear-gradient(135deg, #006633, #00b09b); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(0,102,51,0.2);">
-            2
-        </div>
-        <div style="margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e0f2e9; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-            <div style="font-weight: 600; color: #006633; font-size: 14px; margin-bottom: 2px;">อัปโหลดและยืนยัน</div>
-            <div style="font-size: 12.5px; color: #555; line-height: 1.4;">ลากไฟล์มาวางด้านขวา และติ๊ก 🛡️ <b>ยอมรับเงื่อนไข</b></div>
-        </div>
-    </div>
-
-    <!-- ขั้นตอนที่ 3 -->
-    <div style="display: flex; margin-bottom: 10px; position: relative;">
-        <div style="background: linear-gradient(135deg, #0ea5e9, #38bdf8); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(14,165,233,0.2);">
-            3
-        </div>
-        <div style="margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e0f2fe; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-            <div style="font-weight: 600; color: #0284c7; font-size: 14px; margin-bottom: 2px;">เริ่มการตรวจสอบ</div>
-            <div style="font-size: 12.5px; color: #555; line-height: 1.4;">กดปุ่ม <b>"เริ่มให้ AI ตรวจสอบเอกสาร"</b> และรอรับผลวิเคราะห์ 🚀</div>
-        </div>
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
+    st.markdown(step_html, unsafe_allow_html=True)
     
     st.markdown("---")
     st.markdown("### 📥 ดาวน์โหลดแบบฟอร์ม")
