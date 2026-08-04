@@ -416,7 +416,7 @@ with st.sidebar:
         "<div style='background: linear-gradient(135deg, #006633, #00b09b); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(0,102,51,0.2);'>2</div>"
         "<div style='margin-left: 15px; background: #ffffff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e0f2e9; flex-grow: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.03);'>"
         "<div style='font-weight: 600; color: #006633; font-size: 14px; margin-bottom: 2px;'>อัปโหลดและยืนยัน</div>"
-        "<div style='font-size: 12.5px; color: #555; line-height: 1.4;'>ลากไฟล์มาวางด้านขวา และติ๊ก 🛡️ <b>ยอมรับเงื่อนไข</b></div>"
+        "<div style='font-size: 12.5px; color: #555; line-height: 1.4;'>อัปโหลดไฟล์โครงการและติ๊ก 🛡️ <b>ยอมรับเงื่อนไข</b></div>"
         "</div></div>"
         
         "<!-- ขั้นตอนที่ 3 -->"
