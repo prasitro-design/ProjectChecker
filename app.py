@@ -502,8 +502,7 @@ with col1:
             if not document_text.strip():
                 st.error("⚠️ ไม่พบข้อความในเอกสาร (อาจเป็นไฟล์สแกน)")
             else:
-                st.write(document_text)
-    with col2:
+with col2:
     # ==========================================
     # 📊 แผงสถิติ Dashboard (Quick Key Metrics)
     # ==========================================
@@ -539,6 +538,7 @@ with col1:
     </div>
     """
     st.markdown(dashboard_html, unsafe_allow_html=True)
+    
     st.markdown("### 🤖 2. ผลการวิเคราะห์จาก AI")
     
     if uploaded_file is not None and document_text.strip():
