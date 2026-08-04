@@ -10,6 +10,7 @@ from datetime import datetime
 import pytz
 import re
 import os  # เพิ่มเข้ามาเพื่อใช้เช็คไฟล์ template.docx
+import streamlit.components.v1 as components
 
 # ==========================================
 # 1. ตั้งค่าหน้าเว็บ (Page Config) ต้องอยู่บรรทัดแรกสุด
@@ -420,19 +421,24 @@ with st.sidebar:
     st.markdown("---")
     st.caption("👨‍💻 พัฒนาโดย: นายประสิทธิ์ รอดพันธุ์\n\nนักวิชาการศึกษาชำนาญการ")
 
-    # 👁️ สถิติผู้เข้าใช้เว็บไซต์ (FreeCounterStat)
+# 👁️ สถิติผู้เข้าใช้เว็บไซต์ (FreeVisitorCounters)
     st.markdown("---")
-    st.markdown(
-        """
-        <div style="text-align: center; padding: 12px; background-color: #ffffff; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-            <p style="margin: 0 0 8px 0; font-size: 13px; color: #006633; font-weight: 600;">👁️ สถิติผู้เข้าใช้เว็บไซต์</p>
-            <a href="https://www.freecounterstat.com" title="free web counter" target="_blank">
-                <img src="https://counter11.optistats.ovh/private/freecounterstat.php?c=f45ukslenq5xwu1j492htlknlnqmuqtm" border="0" title="free web counter" alt="free web counter">
-            </a>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    
+    # กำหนด HTML โค้ดที่รวม CSS การตกแต่ง และ Script ของ Counter
+    counter_html = """
+    <div style="text-align: center; padding: 12px; background-color: #ffffff; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-family: sans-serif;">
+        <p style="margin: 0 0 8px 0; font-size: 13px; color: #006633; font-weight: 600;">👁️ สถิติผู้เข้าใช้เว็บไซต์</p>
+        
+        <!-- โค้ด Script จากเว็บ Counter -->
+        <a href='https://www.free-counters.org/' style='font-size: 10px; color: #999; text-decoration: none;'>www.free-Counter.org</a><br>
+        <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=b796677c5d35a0a92c994f959502a1b7c4c6a66c'></script>
+        <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1611880/t/9"></script>
+    </div>
+    """
+    
+    # ใช้ components.html เพื่อรัน JavaScript 
+    # (อาจต้องปรับค่า height ให้พอดีกับขนาดของป้าย Counter)
+    components.html(counter_html, height=120)
 # ==========================================
 # 6. ส่วนแสดงผลเนื้อหาหลัก
 # ==========================================
