@@ -420,8 +420,8 @@ with st.sidebar:
     st.markdown("---")
     st.caption("👨‍💻 พัฒนาโดย: นายประสิทธิ์ รอดพันธุ์\n\nนักวิชาการศึกษาชำนาญการ")
 
-    # 👁️ สถิติผู้เข้าชมเว็บไซต์ (FreeCounterStat)
-st.markdown("---")
+ # 👁️ สถิติผู้เข้าชมเว็บไซต์ (FreeCounterStat)
+    st.markdown("---")
     st.markdown(
         """
         <div style="text-align: center; padding: 12px; background-color: #ffffff; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
