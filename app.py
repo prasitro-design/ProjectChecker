@@ -517,28 +517,24 @@ with col2:
         
         df = pd.read_csv(csv_url)
         
-        # กำหนดชื่อคอลัมน์ให้ตรงกับ Google Sheet (ตามรูปคือ "คะแนนภาพรวม")
         col_name_score = "คะแนนภาพรวม" 
-        col_name_time = "เวลาที่ใช้(วินาที)" # ถ้าไม่มีคอลัมน์นี้ ระบบจะเซ็ตเป็น 0 อัตโนมัติ
+        col_name_time = "เวลาที่ใช้(วินาที)" 
         
         total_projects = len(df)
         
-        # 📌 จัดการคอลัมน์คะแนน (ตัด /100 ออก แล้วแปลงเป็นตัวเลข)
+        # 📌 จัดการคอลัมน์คะแนน
         if col_name_score in df.columns:
-            # 1. แปลงข้อมูลเป็น string ก่อน ป้องกัน error
-            # 2. ใช้ .str.split('/') เพื่อแยกข้อความตรงเครื่องหมายทับ แล้วเอาเฉพาะส่วนแรก (คะแนนดิบ)
             df['clean_score'] = df[col_name_score].astype(str).str.split('/').str[0]
-            
-            # 3. แปลงข้อความที่ตัดแล้วให้เป็นตัวเลข
             df['clean_score'] = pd.to_numeric(df['clean_score'], errors='coerce')
             
-            # 4. คำนวณช่วงคะแนน
+            # คำนวณช่วงคะแนน (เพิ่มช่วงต่ำกว่า 80)
             score_90_100 = len(df[df['clean_score'] >= 90])
             score_80_89 = len(df[(df['clean_score'] >= 80) & (df['clean_score'] < 90)])
-            # score_70_79 = len(df[(df['clean_score'] >= 70) & (df['clean_score'] < 80)]) # เผื่ออนาคตอยากเพิ่มช่วง 70-79
+            score_below_80 = len(df[df['clean_score'] < 80]) # <--- เพิ่มบรรทัดนี้
         else:
             score_90_100 = 0
             score_80_89 = 0
+            score_below_80 = 0 # <--- เพิ่มบรรทัดนี้
             
         # จัดการคอลัมน์เวลาเฉลี่ย
         if col_name_time in df.columns:
@@ -551,8 +547,8 @@ with col2:
         total_projects = 0
         score_90_100 = 0
         score_80_89 = 0
+        score_below_80 = 0 # <--- เพิ่มบรรทัดนี้
         avg_time = 0
-        # st.error(f"Error: {e}") # ปลดคอมเมนต์บรรทัดนี้เพื่อดู Error แบบละเอียดได้
 
     # --- 2. แผงสถิติ Dashboard ---
     dashboard_html = (
@@ -570,11 +566,12 @@ with col2:
         f"<div style='font-size: 22px; color: #0f172a; font-weight: 700;'>~{avg_time} <span style='font-size: 12px; color: #94a3b8; font-weight: 400;'>วินาที</span></div>"
         f"</div>"
         
-        f"<!-- ส่วนที่ 3: ช่วงคะแนน -->"
-        f"<div style='flex: 1.2; background: #ffffff; border-left: 5px solid #f59e0b; border-radius: 10px; padding: 10px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>"
+        f"<!-- ส่วนที่ 3: ช่วงคะแนน (ปรับขนาด flex เป็น 1.5 ให้กว้างขึ้นรองรับ 3 ช่วง) -->"
+        f"<div style='flex: 1.5; background: #ffffff; border-left: 5px solid #f59e0b; border-radius: 10px; padding: 10px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>"
         f"<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px; text-align: center;'>🎯 สัดส่วนคะแนนคุณภาพ</div>"
         f"<div style='display: flex; justify-content: space-around; margin-top: 5px;'>"
         
+        f"<!-- 90-100 -->"
         f"<div style='text-align: center;'>"
         f"<div style='font-size: 18px; color: #166534; font-weight: 700;'>{score_90_100:,}</div>"
         f"<div style='font-size: 11px; color: #94a3b8;'>90-100 คะแนน</div>"
@@ -582,9 +579,18 @@ with col2:
         
         f"<div style='width: 1px; background-color: #e2e8f0; margin: 0 5px;'></div>"
         
+        f"<!-- 80-89 -->"
         f"<div style='text-align: center;'>"
         f"<div style='font-size: 18px; color: #0284c7; font-weight: 700;'>{score_80_89:,}</div>"
         f"<div style='font-size: 11px; color: #94a3b8;'>80-89 คะแนน</div>"
+        f"</div>"
+
+        f"<div style='width: 1px; background-color: #e2e8f0; margin: 0 5px;'></div>"
+        
+        f"<!-- ต่ำกว่า 80 -->"
+        f"<div style='text-align: center;'>"
+        f"<div style='font-size: 18px; color: #dc2626; font-weight: 700;'>{score_below_80:,}</div>"
+        f"<div style='font-size: 11px; color: #94a3b8;'>ต่ำกว่า 80</div>"
         f"</div>"
         
         f"</div>"
