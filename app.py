@@ -501,11 +501,14 @@ with col1:
         with st.expander("🔍 ดูข้อความที่ระบบดึงออกมาได้ (คลิกเพื่อขยาย)"):
             if not document_text.strip():
                 st.error("⚠️ ไม่พบข้อความในเอกสาร (อาจเป็นไฟล์สแกน)")
-           else:
-    with col2: # ✅ ถูกต้อง (ต้องกด Tab 1 ครั้ง หรือเคาะ 4 Spacebar)
-    # ==========================================
+            else:
+                st.write(document_text) # <-- เติมคำสั่งให้แสดงข้อความที่นี่
+
+# ==========================================
+# 📊 คอลัมน์ที่ 2 (ต้องเยื้องให้ตรงกับ with col1:)
+# ==========================================
+with col2:
     # 📊 แผงสถิติ Dashboard (Quick Key Metrics)
-    # ==========================================
     dashboard_html = """
     <div style="display: flex; gap: 15px; margin-bottom: 25px; font-family: 'Kanit', sans-serif;">
         <!-- ส่วนที่ 1: ตรวจไปแล้ว -->
@@ -540,6 +543,8 @@ with col1:
     st.markdown(dashboard_html, unsafe_allow_html=True)
     
     st.markdown("### 🤖 2. ผลการวิเคราะห์จาก AI")
+    
+    # ... (ส่วนโค้ดการตรวจของ AI เช่น กล่องติ๊กยอมรับ PDPA และปุ่มเริ่มตรวจ จะต่อจากบรรทัดนี้เลยครับ) ...
     
     if uploaded_file is not None and document_text.strip():
         # --- เพิ่มกล่องกดยอมรับ PDPA ---
