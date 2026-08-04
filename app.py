@@ -23,7 +23,22 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
+# ==========================================
+# 🎨 ตั้งค่า CSS เพื่อลดช่องว่างด้านบนของเว็บ
+# ==========================================
+st.markdown("""
+    <style>
+        /* ลดช่องว่างด้านบนของพื้นที่แสดงผลหลัก */
+        .block-container {
+            padding-top: 2rem !important; 
+            padding-bottom: 0rem !important;
+        }
+        /* ซ่อนเมนู Header ด้านบนสุด (พวกปุ่ม Deploy, Menu) ถ้าต้องการให้ดูคลีนขึ้น */
+        header {
+            visibility: hidden;
+        }
+    </style>
+""", unsafe_allow_html=True)
 # ==========================================
 # 2. ตกแต่งหน้าตาเว็บด้วย CSS และตั้งค่าพื้นหลัง
 # ==========================================
