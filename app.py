@@ -566,7 +566,7 @@ with col2:
         st.info("👈 กรุณาอัปโหลดเอกสารในช่องด้านซ้ายมือ เพื่อเปิดใช้งานระบบ AI")
 
 # ==========================================
-# 📊 แผงสถิติภาพรวมของระบบ (สไตล์ Modern AI)
+# 📊 แผงสถิติภาพรวมของระบบ (สไตล์ Modern AI + แอนิเมชันลอยเข้า)
 # ==========================================
 st.write("") 
 st.write("") 
@@ -613,7 +613,18 @@ dashboard_html = f"""
             margin: 0 auto;
         }}
         
-        /* สไตล์การ์ดแบบ Modern AI */
+        /* 🎬 สร้างแอนิเมชัน ลอยขึ้นพร้อมค่อยๆ ปรากฏ */
+        @keyframes fadeSlideUp {{
+            0% {{
+                opacity: 0;
+                transform: translateY(40px); /* เริ่มต้นต่ำลงไป 40px */
+            }}
+            100% {{
+                opacity: 1;
+                transform: translateY(0);
+            }}
+        }}
+
         .ai-card {{
             background: #ffffff;
             border-radius: 20px;
@@ -621,28 +632,39 @@ dashboard_html = f"""
             box-shadow: 0 10px 30px -5px rgba(79, 70, 229, 0.12), inset 0 0 0 1px rgba(226, 232, 240, 0.8);
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-        }}
-        .ai-card:hover {{
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.2);
+            
+            /* ตั้งค่าเริ่มต้นให้ซ่อนไว้ก่อน เพื่อรอแอนิเมชันทำงาน */
+            opacity: 0; 
+            animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
         }}
         
-        /* เส้นสีเรืองแสงด้านบนการ์ด */
+        .ai-card:hover {{
+            transform: translateY(-5px) !important; /* ยกขึ้นเมื่อชี้เมาส์ */
+            box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.25);
+        }}
+        
         .ai-card::before {{
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; height: 4px;
         }}
-        .card-1 {{ flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: center; }}
+        
+        /* ⏱️ กำหนดเวลาดีเลย์ให้แต่ละกล่อง */
+        .card-1 {{ 
+            flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: center; 
+            animation-delay: 0.2s; /* กล่องแรกโผล่มาก่อน */
+        }}
         .card-1::before {{ background: linear-gradient(90deg, #3b82f6, #8b5cf6); }}
         
-        .card-2 {{ flex: 1.5; text-align: center; }}
+        .card-2 {{ 
+            flex: 1.5; text-align: center; 
+            animation-delay: 0.5s; /* กล่องสองตามมาทีหลัง หน่วง 0.5 วิ */
+        }}
         .card-2::before {{ background: linear-gradient(90deg, #10b981, #0ea5e9, #f43f5e); }}
 
         .title {{ font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }}
         
-        /* การทำตัวอักษรไล่สี (Gradient Text) */
         .gradient-text {{
             background-clip: text;
             -webkit-background-clip: text;
@@ -657,14 +679,12 @@ dashboard_html = f"""
         .score-box {{ text-align: center; }}
         .score-num {{ font-size: 32px; line-height: 1.1; }}
         
-        /* โทนสีสำหรับคะแนนแต่ละระดับ */
         .score-90 {{ background-image: linear-gradient(135deg, #10b981, #047857); }}
         .score-80 {{ background-image: linear-gradient(135deg, #0ea5e9, #2563eb); }}
         .score-below {{ background-image: linear-gradient(135deg, #f43f5e, #be123c); }}
         
         .score-label {{ font-size: 13px; color: #64748b; font-weight: 500; margin-top: 4px; }}
         
-        /* เส้นคั่นแบบไล่สี (Fade out หัวท้าย) */
         .divider {{ 
             width: 1.5px; 
             height: 50px; 
@@ -724,17 +744,22 @@ dashboard_html = f"""
             window.requestAnimationFrame(step);
         }}
 
-        // หน่วงเวลาให้อนิเมชั่นเริ่มช้าลงนิดนึงเพื่อความเท่
+        // สั่งให้ตัวเลขวิ่งให้สอดคล้องกับจังหวะที่กล่องลอยขึ้นมา
+        // กล่องที่ 1 ดีเลย์ 0.2s เราจะเริ่มวิ่งเลขตอน 0.4s 
         setTimeout(() => {{
-            animateValue("total_count", 0, {total_projects}, 1800);
-            animateValue("count_90", 0, {score_90_100}, 1800);
-            animateValue("count_80", 0, {score_80_89}, 1800);
-            animateValue("count_below", 0, {score_below_80}, 1800);
-        }}, 200);
+            animateValue("total_count", 0, {total_projects}, 1500);
+        }}, 400);
+
+        // กล่องที่ 2 ดีเลย์ 0.5s เราจะเริ่มวิ่งเลขตอน 0.7s
+        setTimeout(() => {{
+            animateValue("count_90", 0, {score_90_100}, 1500);
+            animateValue("count_80", 0, {score_80_89}, 1500);
+            animateValue("count_below", 0, {score_below_80}, 1500);
+        }}, 700);
     </script>
 </body>
 </html>
 """
 
-# ปรับความสูงเพิ่มขึ้นเล็กน้อย เพื่อไม่ให้เงาของการ์ดโดนตัดเมื่อเอาเมาส์ชี้
-components.html(dashboard_html, height=180)
+# ปรับความสูงเพิ่มเป็น 200px เพื่อเผื่อระยะที่กล่องเริ่มลอยจากด้านล่าง (ไม่ให้โดนตัดขอบตอนเริ่มโผล่)
+components.html(dashboard_html, height=200)
