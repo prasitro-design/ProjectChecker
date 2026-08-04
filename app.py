@@ -426,8 +426,8 @@ with st.sidebar:
         """
         <div style="text-align: center; padding: 12px; background-color: #ffffff; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
             <p style="margin: 0 0 8px 0; font-size: 13px; color: #006633; font-weight: 600;">👁️ สถิติผู้เข้าชมเว็บไซต์</p>
-            <a href="https://www.freecounterstat.com" title="free web counter" target="_blank">
-                <img src="https://counter11.optistats.ovh/private/freecounterstat.php?c=f45ukslenq5xwu1j492htlknlnqmuqtm" border="0" title="free web counter" alt="free web counter">
+ <a href='https://www.free-counters.org/'>www.free-Counter.org</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=5384a595f66b5029ba07e40f7193b9b552e134c3'></script>
+<script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1611878/t/9"></script>
             </a>
         </div>
         """,
