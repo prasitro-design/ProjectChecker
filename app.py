@@ -420,19 +420,19 @@ with st.sidebar:
     st.markdown("---")
     st.caption("👨‍💻 พัฒนาโดย: นายประสิทธิ์ รอดพันธุ์\n\nนักวิชาการศึกษาชำนาญการ")
 
-# 👁️ สถิติผู้เข้าใช้เว็บไซต์ (FreeCounterStat)
-st.markdown("---")
-st.markdown(
-    """
-    <div style="text-align: center; padding: 12px; background-color: #ffffff; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-        <p style="margin: 0 0 8px 0; font-size: 13px; color: #006633; font-weight: 600;">👁️ สถิติผู้เข้าใช้เว็บไซต์</p>
-        <a href='https://www.free-counters.org/'>www.free-Counter.org</a> 
-        <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=908d071cf29ce98637e249250887f6c215524c73'></script>
-        <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1611879/t/9"></script>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+    # 👁️ สถิติผู้เข้าชมเว็บไซต์ (FreeCounterStat)
+    st.markdown("---")
+    st.markdown(
+        """
+        <div style="text-align: center; padding: 12px; background-color: #ffffff; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <p style="margin: 0 0 8px 0; font-size: 13px; color: #006633; font-weight: 600;">👁️ สถิติผู้เข้าชมเว็บไซต์</p>
+            <a href="https://www.freecounterstat.com" title="free web counter" target="_blank">
+                <img src="https://counter11.optistats.ovh/private/freecounterstat.php?c=f45ukslenq5xwu1j492htlknlnqmuqtm" border="0" title="free web counter" alt="free web counter">
+            </a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 # ==========================================
 # 6. ส่วนแสดงผลเนื้อหาหลัก
 # ==========================================
