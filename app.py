@@ -566,12 +566,12 @@ with col2:
         st.info("👈 กรุณาอัปโหลดเอกสารในช่องด้านซ้ายมือ เพื่อเปิดใช้งานระบบ AI")
 
 # ==========================================
-# 📊 แผงสถิติภาพรวมของระบบ (แสดงผลด้านล่างสุด)
+# 📊 แผงสถิติภาพรวมของระบบ (สไตล์ Modern AI)
 # ==========================================
 st.write("") 
 st.write("") 
-st.markdown("---") # เส้นคั่นบางๆ แยกระหว่างพื้นที่ทำงานกับสถิติ
-st.markdown("<h4 style='text-align: center; color: #64748b; font-family: \"Kanit\", sans-serif; margin-bottom: 20px;'>📊 สถิติการประเมินโครงการภาพรวม</h4>", unsafe_allow_html=True)
+st.markdown("---") 
+st.markdown("<h4 style='text-align: center; color: #475569; font-family: \"Kanit\", sans-serif; margin-bottom: 25px; letter-spacing: 0.5px;'>✨ สถิติการประเมินโครงการภาพรวม</h4>", unsafe_allow_html=True)
 
 try:
     sheet_id = "1jQVFbiKKQjxJVk8HHwLVzNlNDWyA2CPQSnNsVAz3aNk"
@@ -598,79 +598,106 @@ dashboard_html = f"""
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;800&display=swap" rel="stylesheet">
     <style>
         body {{
             font-family: 'Kanit', sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 10px;
             background-color: transparent; 
         }}
         .container {{
             display: flex;
-            gap: 20px;
-            max-width: 900px; /* จำกัดความกว้างให้ดูสมดุลตรงกลางจอ */
+            gap: 25px;
+            max-width: 900px;
             margin: 0 auto;
         }}
-        .card-1 {{
-            flex: 1;
-            background: #ffffff;
-            border-left: 5px solid #0ea5e9;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }}
-        .card-2 {{
-            flex: 1.5;
-            background: #ffffff;
-            border-left: 5px solid #f59e0b;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }}
-        .title {{ font-size: 15px; color: #64748b; font-weight: 600; text-align: center; margin-bottom: 10px; }}
-        .number {{ font-size: 28px; color: #0f172a; font-weight: 700; }}
-        .unit {{ font-size: 14px; color: #94a3b8; font-weight: 400; }}
         
-        .score-container {{ display: flex; justify-content: space-around; align-items: center; margin-top: 10px; }}
+        /* สไตล์การ์ดแบบ Modern AI */
+        .ai-card {{
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px 25px;
+            box-shadow: 0 10px 30px -5px rgba(79, 70, 229, 0.12), inset 0 0 0 1px rgba(226, 232, 240, 0.8);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }}
+        .ai-card:hover {{
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.2);
+        }}
+        
+        /* เส้นสีเรืองแสงด้านบนการ์ด */
+        .ai-card::before {{
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+        }}
+        .card-1 {{ flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: center; }}
+        .card-1::before {{ background: linear-gradient(90deg, #3b82f6, #8b5cf6); }}
+        
+        .card-2 {{ flex: 1.5; text-align: center; }}
+        .card-2::before {{ background: linear-gradient(90deg, #10b981, #0ea5e9, #f43f5e); }}
+
+        .title {{ font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }}
+        
+        /* การทำตัวอักษรไล่สี (Gradient Text) */
+        .gradient-text {{
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            display: inline-block;
+        }}
+        .total-num {{ font-size: 42px; background-image: linear-gradient(135deg, #3b82f6, #8b5cf6); line-height: 1.1; }}
+        .unit {{ font-size: 14px; color: #94a3b8; font-weight: 500; margin-left: 5px; }}
+
+        .score-container {{ display: flex; justify-content: space-around; align-items: center; margin-top: 15px; }}
         .score-box {{ text-align: center; }}
-        .score-num {{ font-size: 24px; font-weight: 700; }}
-        .score-90 {{ color: #166534; }}
-        .score-80 {{ color: #0284c7; }}
-        .score-below {{ color: #dc2626; }}
-        .score-label {{ font-size: 13px; color: #94a3b8; }}
-        .divider {{ width: 1px; height: 40px; background-color: #e2e8f0; margin: 0 10px; }}
+        .score-num {{ font-size: 32px; line-height: 1.1; }}
+        
+        /* โทนสีสำหรับคะแนนแต่ละระดับ */
+        .score-90 {{ background-image: linear-gradient(135deg, #10b981, #047857); }}
+        .score-80 {{ background-image: linear-gradient(135deg, #0ea5e9, #2563eb); }}
+        .score-below {{ background-image: linear-gradient(135deg, #f43f5e, #be123c); }}
+        
+        .score-label {{ font-size: 13px; color: #64748b; font-weight: 500; margin-top: 4px; }}
+        
+        /* เส้นคั่นแบบไล่สี (Fade out หัวท้าย) */
+        .divider {{ 
+            width: 1.5px; 
+            height: 50px; 
+            background: linear-gradient(to bottom, transparent, #cbd5e1, transparent); 
+            margin: 0 10px; 
+        }}
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- ส่วนที่ 1 -->
-        <div class="card-1">
-            <div class="title" style="margin-bottom: 5px;">📊 ตรวจไปแล้วทั้งหมด</div>
-            <div><span id="total_count" class="number">0</span> <span class="unit">โครงการ</span></div>
+        <!-- ส่วนที่ 1: ตรวจไปแล้วทั้งหมด -->
+        <div class="ai-card card-1">
+            <div class="title">🚀 โครงการที่ AI วิเคราะห์แล้ว</div>
+            <div><span id="total_count" class="gradient-text total-num">0</span> <span class="unit">โครงการ</span></div>
         </div>
         
-        <!-- ส่วนที่ 2 -->
-        <div class="card-2">
+        <!-- ส่วนที่ 2: สัดส่วนคะแนน -->
+        <div class="ai-card card-2">
             <div class="title">🎯 สัดส่วนคะแนนคุณภาพ</div>
             <div class="score-container">
                 <div class="score-box">
-                    <div id="count_90" class="score-num score-90">0</div>
-                    <div class="score-label">90-100 คะแนน</div>
+                    <div id="count_90" class="gradient-text score-num score-90">0</div>
+                    <div class="score-label">ยอดเยี่ยม (90-100)</div>
                 </div>
                 <div class="divider"></div>
                 <div class="score-box">
-                    <div id="count_80" class="score-num score-80">0</div>
-                    <div class="score-label">80-89 คะแนน</div>
+                    <div id="count_80" class="gradient-text score-num score-80">0</div>
+                    <div class="score-label">ดีมาก (80-89)</div>
                 </div>
                 <div class="divider"></div>
                 <div class="score-box">
-                    <div id="count_below" class="score-num score-below">0</div>
-                    <div class="score-label">ต่ำกว่า 80</div>
+                    <div id="count_below" class="gradient-text score-num score-below">0</div>
+                    <div class="score-label">ต้องปรับปรุง (< 80)</div>
                 </div>
             </div>
         </div>
@@ -697,13 +724,17 @@ dashboard_html = f"""
             window.requestAnimationFrame(step);
         }}
 
-        animateValue("total_count", 0, {total_projects}, 1500);
-        animateValue("count_90", 0, {score_90_100}, 1500);
-        animateValue("count_80", 0, {score_80_89}, 1500);
-        animateValue("count_below", 0, {score_below_80}, 1500);
+        // หน่วงเวลาให้อนิเมชั่นเริ่มช้าลงนิดนึงเพื่อความเท่
+        setTimeout(() => {{
+            animateValue("total_count", 0, {total_projects}, 1800);
+            animateValue("count_90", 0, {score_90_100}, 1800);
+            animateValue("count_80", 0, {score_80_89}, 1800);
+            animateValue("count_below", 0, {score_below_80}, 1800);
+        }}, 200);
     </script>
 </body>
 </html>
 """
 
-components.html(dashboard_html, height=150)
+# ปรับความสูงเพิ่มขึ้นเล็กน้อย เพื่อไม่ให้เงาของการ์ดโดนตัดเมื่อเอาเมาส์ชี้
+components.html(dashboard_html, height=180)
