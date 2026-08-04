@@ -393,7 +393,7 @@ with st.sidebar:
             st.image("logo.png", use_container_width=True) 
         except FileNotFoundError:
             pass
-st.markdown("### 📌 คำแนะนำการใช้งาน")
+    st.markdown("### 📌 คำแนะนำการใช้งาน")
     st.info("""
     **ขั้นตอนการตรวจเอกสาร:**
     1. ดาวน์โหลดแบบฟอร์ม Word ไปพิมพ์รายละเอียด
@@ -402,6 +402,7 @@ st.markdown("### 📌 คำแนะนำการใช้งาน")
     3. อัปโหลดไฟล์และกดยอมรับเงื่อนไข
     4. กดปุ่ม **เริ่มให้ AI ตรวจสอบและให้คะแนน**
     """)
+    
     st.markdown("---")
     st.markdown("### 📥 ดาวน์โหลดแบบฟอร์ม")
     # ปุ่มดาวน์โหลดไฟล์ Word
