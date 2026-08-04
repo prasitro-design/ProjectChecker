@@ -30,7 +30,7 @@ st.markdown("""
     <style>
         /* ลดช่องว่างด้านบนของพื้นที่แสดงผลหลัก */
         .block-container {
-            padding-top: 0rem !important; 
+            padding-top: -1rem !important; 
             padding-bottom: 0rem !important;
         }
         /* ซ่อนเมนู Header ด้านบนสุด (พวกปุ่ม Deploy, Menu) ถ้าต้องการให้ดูคลีนขึ้น */
