@@ -521,12 +521,10 @@ with col2:
         
         total_projects = len(df)
         
-        # 📌 จัดการคอลัมน์คะแนน
         if col_name_score in df.columns:
             df['clean_score'] = df[col_name_score].astype(str).str.split('/').str[0]
             df['clean_score'] = pd.to_numeric(df['clean_score'], errors='coerce')
             
-            # คำนวณช่วงคะแนน
             score_90_100 = len(df[df['clean_score'] >= 90])
             score_80_89 = len(df[(df['clean_score'] >= 80) & (df['clean_score'] < 90)])
             score_below_80 = len(df[df['clean_score'] < 80])
@@ -541,50 +539,123 @@ with col2:
         score_80_89 = 0
         score_below_80 = 0
 
-    # --- 2. แผงสถิติ Dashboard (เหลือ 2 การ์ด) ---
-    dashboard_html = (
-        f"<div style='display: flex; gap: 15px; margin-bottom: 25px; font-family: \"Kanit\", sans-serif;'>"
-        
-        f"<!-- ส่วนที่ 1: ตรวจไปแล้ว -->"
-        f"<div style='flex: 1; background: #ffffff; border-left: 5px solid #0ea5e9; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; display: flex; flex-direction: column; justify-content: center;'>"
-        f"<div style='font-size: 14px; color: #64748b; font-weight: 600; margin-bottom: 5px;'>📊 ตรวจไปแล้วทั้งหมด</div>"
-        f"<div style='font-size: 26px; color: #0f172a; font-weight: 700;'>{total_projects:,} <span style='font-size: 13px; color: #94a3b8; font-weight: 400;'>โครงการ</span></div>"
-        f"</div>"
-        
-        f"<!-- ส่วนที่ 2: ช่วงคะแนน (ปรับขนาด flex เป็น 1.5 ให้กว้างกว่ากล่องแรก) -->"
-        f"<div style='flex: 1.5; background: #ffffff; border-left: 5px solid #f59e0b; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>"
-        f"<div style='font-size: 14px; color: #64748b; font-weight: 600; margin-bottom: 10px; text-align: center;'>🎯 สัดส่วนคะแนนคุณภาพ</div>"
-        f"<div style='display: flex; justify-content: space-around; align-items: center;'>"
-        
-        f"<!-- 90-100 -->"
-        f"<div style='text-align: center;'>"
-        f"<div style='font-size: 22px; color: #166534; font-weight: 700;'>{score_90_100:,}</div>"
-        f"<div style='font-size: 12px; color: #94a3b8;'>90-100 คะแนน</div>"
-        f"</div>"
-        
-        f"<div style='width: 1px; height: 30px; background-color: #e2e8f0; margin: 0 10px;'></div>"
-        
-        f"<!-- 80-89 -->"
-        f"<div style='text-align: center;'>"
-        f"<div style='font-size: 22px; color: #0284c7; font-weight: 700;'>{score_80_89:,}</div>"
-        f"<div style='font-size: 12px; color: #94a3b8;'>80-89 คะแนน</div>"
-        f"</div>"
+    # --- 2. แผงสถิติ Dashboard (อัปเกรดเป็น HTML Component เพื่อให้เลขวิ่งได้) ---
+    # หมายเหตุ: ใน f-string ของ Python เครื่องหมายปีกกาของ CSS/JS ต้องเบิ้ลเป็น {{ }}
+    dashboard_html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+            body {{
+                font-family: 'Kanit', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: transparent; 
+            }}
+            .container {{
+                display: flex;
+                gap: 15px;
+            }}
+            .card-1 {{
+                flex: 1;
+                background: #ffffff;
+                border-left: 5px solid #0ea5e9;
+                border-radius: 10px;
+                padding: 15px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }}
+            .card-2 {{
+                flex: 1.5;
+                background: #ffffff;
+                border-left: 5px solid #f59e0b;
+                border-radius: 10px;
+                padding: 15px 15px 5px 15px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            }}
+            .title {{ font-size: 14px; color: #64748b; font-weight: 600; }}
+            .number {{ font-size: 26px; color: #0f172a; font-weight: 700; }}
+            .unit {{ font-size: 13px; color: #94a3b8; font-weight: 400; }}
+            
+            .score-container {{ display: flex; justify-content: space-around; align-items: center; margin-top: 10px; }}
+            .score-box {{ text-align: center; }}
+            .score-num {{ font-size: 22px; font-weight: 700; }}
+            .score-90 {{ color: #166534; }}
+            .score-80 {{ color: #0284c7; }}
+            .score-below {{ color: #dc2626; }}
+            .score-label {{ font-size: 12px; color: #94a3b8; }}
+            .divider {{ width: 1px; height: 30px; background-color: #e2e8f0; margin: 0 10px; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!-- ส่วนที่ 1 -->
+            <div class="card-1">
+                <div class="title" style="margin-bottom: 5px;">📊 ตรวจไปแล้วทั้งหมด</div>
+                <div><span id="total_count" class="number">0</span> <span class="unit">โครงการ</span></div>
+            </div>
+            
+            <!-- ส่วนที่ 2 -->
+            <div class="card-2">
+                <div class="title" style="text-align: center;">🎯 สัดส่วนคะแนนคุณภาพ</div>
+                <div class="score-container">
+                    <div class="score-box">
+                        <div id="count_90" class="score-num score-90">0</div>
+                        <div class="score-label">90-100 คะแนน</div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="score-box">
+                        <div id="count_80" class="score-num score-80">0</div>
+                        <div class="score-label">80-89 คะแนน</div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="score-box">
+                        <div id="count_below" class="score-num score-below">0</div>
+                        <div class="score-label">ต่ำกว่า 80</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        f"<div style='width: 1px; height: 30px; background-color: #e2e8f0; margin: 0 10px;'></div>"
-        
-        f"<!-- ต่ำกว่า 80 -->"
-        f"<div style='text-align: center;'>"
-        f"<div style='font-size: 22px; color: #dc2626; font-weight: 700;'>{score_below_80:,}</div>"
-        f"<div style='font-size: 12px; color: #94a3b8;'>ต่ำกว่า 80</div>"
-        f"</div>"
-        
-        f"</div>"
-        f"</div>"
-        
-        f"</div>"
-    )
+        <script>
+            // ฟังก์ชันสำหรับรันตัวเลขจาก 0 ไปถึงเป้าหมาย
+            function animateValue(id, start, end, duration) {{
+                if (start === end) {{
+                    document.getElementById(id).innerHTML = end.toLocaleString();
+                    return;
+                }}
+                var obj = document.getElementById(id);
+                var startTime = null;
+                function step(timestamp) {{
+                    if (!startTime) startTime = timestamp;
+                    var progress = Math.min((timestamp - startTime) / duration, 1);
+                    // คำนวณและใส่คอมม่าหลักพันให้ตัวเลข
+                    obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                    if (progress < 1) {{
+                        window.requestAnimationFrame(step);
+                    }} else {{
+                        obj.innerHTML = end.toLocaleString();
+                    }}
+                }}
+                window.requestAnimationFrame(step);
+            }}
+
+            // เรียกใช้งานฟังก์ชัน โดยตั้งเวลาให้วิ่งจบใน 1500 มิลลิวินาที (1.5 วินาที)
+            animateValue("total_count", 0, {total_projects}, 1500);
+            animateValue("count_90", 0, {score_90_100}, 1500);
+            animateValue("count_80", 0, {score_80_89}, 1500);
+            animateValue("count_below", 0, {score_below_80}, 1500);
+        </script>
+    </body>
+    </html>
+    """
     
-    st.markdown(dashboard_html, unsafe_allow_html=True)
+    # ใช้ components.html แทน st.markdown แบบเดิม (ความสูง 120px เพื่อไม่ให้มี Scrollbar)
+    components.html(dashboard_html, height=120)
     
     st.markdown("### 🤖 2. ผลการวิเคราะห์จาก AI")
     
