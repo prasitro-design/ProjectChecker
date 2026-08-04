@@ -229,6 +229,43 @@ def set_background(image_file):
 
 set_background('background.jpg')
 # ==========================================
+# 📢 แถบประกาศข่าวสารสำคัญ (Top Announcement Banner)
+# ==========================================
+st.markdown("""
+<div style="
+    background: linear-gradient(90deg, #f0fdf4 0%, #ffffff 100%);
+    border-left: 6px solid #16a34a;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+">
+    <div style="font-size: 24px; margin-right: 15px; animation: pulse 2s infinite;">
+        📢
+    </div>
+    <div>
+        <h4 style="margin: 0; color: #166534; font-size: 16px; font-weight: 600; padding-bottom: 3px;">
+            ประกาศจากฝ่ายพัฒนานิสิต
+        </h4>
+        <p style="margin: 0; color: #4b5563; font-size: 14px; font-weight: 400;">
+            เปิดรับโครงการที่จะนำเสนอในรอบเดือนสิงหาคม 2569 ตั้งแต่วันนี้ - 10 สิงหาคม 2569 | หากมีข้อสงสัยติดต่อเบอร์โทรศัพท์ 083-252-2380
+        </p>
+    </div>
+</div>
+
+<style>
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+</style>
+""", unsafe_allow_html=True)
+# ==========================================
 # 3. ตั้งค่า API Key ของ Gemini
 # ==========================================
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
