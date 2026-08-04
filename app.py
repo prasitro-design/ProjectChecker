@@ -388,20 +388,14 @@ def log_to_google_sheets(filename, result_text):
 # 5. การจัด Layout แถบด้านข้าง (Sidebar)
 # ==========================================
 with st.sidebar:
-    col_left, col_mid, col_right = st.columns([1, 2, 1])
-    with col_mid:
-        try:
-            st.image("logo.png", use_container_width=True) 
-        except FileNotFoundError:
-            pass
+    # 1. คำสั่ง Python ตรงนี้ต้องย่อหน้าให้ตรงกัน
+    st.markdown("### 📌 คำแนะนำการใช้งาน")
     
-st.markdown("### 📌 คำแนะนำการใช้งาน")
-    
-    # 📌 การ์ดแสดงขั้นตอนแบบ Visual
+    # 2. คำสั่ง st.markdown ต้องย่อหน้าตรงกับบรรทัดบน
     st.markdown("""
 <div style="font-family: 'Kanit', sans-serif; margin-top: 10px;">
     
-    <!-- ขั้นตอนที่ 1 -->
+    <!-- 3. ส่วนโค้ด HTML ด้านในนี้ ดันชิดขอบซ้ายสุดได้เลยครับ -->
     <div style="display: flex; margin-bottom: 15px; position: relative;">
         <div style="position: absolute; left: 15px; top: 32px; bottom: -20px; width: 2px; background-color: #bce1ce; z-index: 0;"></div>
         <div style="background: linear-gradient(135deg, #006633, #00b09b); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(0,102,51,0.2);">
@@ -425,7 +419,7 @@ st.markdown("### 📌 คำแนะนำการใช้งาน")
         </div>
     </div>
 
-    <!-- ขั้นตอนที่ 3 (ไม่มีเส้นเชื่อมต่อแล้ว) -->
+    <!-- ขั้นตอนที่ 3 -->
     <div style="display: flex; margin-bottom: 10px; position: relative;">
         <div style="background: linear-gradient(135deg, #0ea5e9, #38bdf8); color: white; border-radius: 50%; width: 32px; height: 32px; min-width: 32px; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 1; box-shadow: 0 3px 6px rgba(14,165,233,0.2);">
             3
