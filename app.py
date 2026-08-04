@@ -518,7 +518,6 @@ with col2:
         df = pd.read_csv(csv_url)
         
         col_name_score = "คะแนนภาพรวม" 
-        col_name_time = "เวลาที่ใช้(วินาที)" 
         
         total_projects = len(df)
         
@@ -527,70 +526,56 @@ with col2:
             df['clean_score'] = df[col_name_score].astype(str).str.split('/').str[0]
             df['clean_score'] = pd.to_numeric(df['clean_score'], errors='coerce')
             
-            # คำนวณช่วงคะแนน (เพิ่มช่วงต่ำกว่า 80)
+            # คำนวณช่วงคะแนน
             score_90_100 = len(df[df['clean_score'] >= 90])
             score_80_89 = len(df[(df['clean_score'] >= 80) & (df['clean_score'] < 90)])
-            score_below_80 = len(df[df['clean_score'] < 80]) # <--- เพิ่มบรรทัดนี้
+            score_below_80 = len(df[df['clean_score'] < 80])
         else:
             score_90_100 = 0
             score_80_89 = 0
-            score_below_80 = 0 # <--- เพิ่มบรรทัดนี้
-            
-        # จัดการคอลัมน์เวลาเฉลี่ย
-        if col_name_time in df.columns:
-            df[col_name_time] = pd.to_numeric(df[col_name_time], errors='coerce')
-            avg_time = math.ceil(df[col_name_time].mean()) if not pd.isna(df[col_name_time].mean()) else 0
-        else:
-            avg_time = 0
+            score_below_80 = 0
             
     except Exception as e:
         total_projects = 0
         score_90_100 = 0
         score_80_89 = 0
-        score_below_80 = 0 # <--- เพิ่มบรรทัดนี้
-        avg_time = 0
+        score_below_80 = 0
 
-    # --- 2. แผงสถิติ Dashboard ---
+    # --- 2. แผงสถิติ Dashboard (เหลือ 2 การ์ด) ---
     dashboard_html = (
         f"<div style='display: flex; gap: 15px; margin-bottom: 25px; font-family: \"Kanit\", sans-serif;'>"
         
         f"<!-- ส่วนที่ 1: ตรวจไปแล้ว -->"
-        f"<div style='flex: 1; background: #ffffff; border-left: 5px solid #0ea5e9; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;'>"
-        f"<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px;'>📊 ตรวจไปแล้วทั้งหมด</div>"
-        f"<div style='font-size: 22px; color: #0f172a; font-weight: 700;'>{total_projects:,} <span style='font-size: 12px; color: #94a3b8; font-weight: 400;'>โครงการ</span></div>"
+        f"<div style='flex: 1; background: #ffffff; border-left: 5px solid #0ea5e9; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; display: flex; flex-direction: column; justify-content: center;'>"
+        f"<div style='font-size: 14px; color: #64748b; font-weight: 600; margin-bottom: 5px;'>📊 ตรวจไปแล้วทั้งหมด</div>"
+        f"<div style='font-size: 26px; color: #0f172a; font-weight: 700;'>{total_projects:,} <span style='font-size: 13px; color: #94a3b8; font-weight: 400;'>โครงการ</span></div>"
         f"</div>"
         
-        f"<!-- ส่วนที่ 2: เวลาเฉลี่ย -->"
-        f"<div style='flex: 1; background: #ffffff; border-left: 5px solid #10b981; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;'>"
-        f"<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px;'>⏱️ เวลาตรวจเฉลี่ย</div>"
-        f"<div style='font-size: 22px; color: #0f172a; font-weight: 700;'>~{avg_time} <span style='font-size: 12px; color: #94a3b8; font-weight: 400;'>วินาที</span></div>"
-        f"</div>"
-        
-        f"<!-- ส่วนที่ 3: ช่วงคะแนน (ปรับขนาด flex เป็น 1.5 ให้กว้างขึ้นรองรับ 3 ช่วง) -->"
-        f"<div style='flex: 1.5; background: #ffffff; border-left: 5px solid #f59e0b; border-radius: 10px; padding: 10px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>"
-        f"<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px; text-align: center;'>🎯 สัดส่วนคะแนนคุณภาพ</div>"
-        f"<div style='display: flex; justify-content: space-around; margin-top: 5px;'>"
+        f"<!-- ส่วนที่ 2: ช่วงคะแนน (ปรับขนาด flex เป็น 1.5 ให้กว้างกว่ากล่องแรก) -->"
+        f"<div style='flex: 1.5; background: #ffffff; border-left: 5px solid #f59e0b; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>"
+        f"<div style='font-size: 14px; color: #64748b; font-weight: 600; margin-bottom: 10px; text-align: center;'>🎯 สัดส่วนคะแนนคุณภาพ</div>"
+        f"<div style='display: flex; justify-content: space-around; align-items: center;'>"
         
         f"<!-- 90-100 -->"
         f"<div style='text-align: center;'>"
-        f"<div style='font-size: 18px; color: #166534; font-weight: 700;'>{score_90_100:,}</div>"
-        f"<div style='font-size: 11px; color: #94a3b8;'>90-100 คะแนน</div>"
+        f"<div style='font-size: 22px; color: #166534; font-weight: 700;'>{score_90_100:,}</div>"
+        f"<div style='font-size: 12px; color: #94a3b8;'>90-100 คะแนน</div>"
         f"</div>"
         
-        f"<div style='width: 1px; background-color: #e2e8f0; margin: 0 5px;'></div>"
+        f"<div style='width: 1px; height: 30px; background-color: #e2e8f0; margin: 0 10px;'></div>"
         
         f"<!-- 80-89 -->"
         f"<div style='text-align: center;'>"
-        f"<div style='font-size: 18px; color: #0284c7; font-weight: 700;'>{score_80_89:,}</div>"
-        f"<div style='font-size: 11px; color: #94a3b8;'>80-89 คะแนน</div>"
+        f"<div style='font-size: 22px; color: #0284c7; font-weight: 700;'>{score_80_89:,}</div>"
+        f"<div style='font-size: 12px; color: #94a3b8;'>80-89 คะแนน</div>"
         f"</div>"
 
-        f"<div style='width: 1px; background-color: #e2e8f0; margin: 0 5px;'></div>"
+        f"<div style='width: 1px; height: 30px; background-color: #e2e8f0; margin: 0 10px;'></div>"
         
         f"<!-- ต่ำกว่า 80 -->"
         f"<div style='text-align: center;'>"
-        f"<div style='font-size: 18px; color: #dc2626; font-weight: 700;'>{score_below_80:,}</div>"
-        f"<div style='font-size: 11px; color: #94a3b8;'>ต่ำกว่า 80</div>"
+        f"<div style='font-size: 22px; color: #dc2626; font-weight: 700;'>{score_below_80:,}</div>"
+        f"<div style='font-size: 12px; color: #94a3b8;'>ต่ำกว่า 80</div>"
         f"</div>"
         
         f"</div>"
