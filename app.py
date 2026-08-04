@@ -236,7 +236,7 @@ set_background('background.jpg')
 # ==========================================
 st.markdown("""
 <div style="
-    background: linear-gradient(90deg, #f0fdf4 0%, #ffffff 100%);
+    background: linear-gradient(90deg, #fde0dc 0%, #ffffff 100%);
     border-left: 6px solid #16a34a;
     border-radius: 8px;
     padding: 15px 20px;
