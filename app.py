@@ -505,44 +505,49 @@ with col1:
                 st.write(document_text) # <-- เติมคำสั่งให้แสดงข้อความที่นี่
 
 # ==========================================
-# 📊 คอลัมน์ที่ 2 (ต้องเยื้องให้ตรงกับ with col1:)
+# 📊 คอลัมน์ที่ 2
 # ==========================================
 with col2:
-    # 📊 แผงสถิติ Dashboard (Quick Key Metrics)
-    dashboard_html = """
-    <div style="display: flex; gap: 15px; margin-bottom: 25px; font-family: 'Kanit', sans-serif;">
-        <!-- ส่วนที่ 1: ตรวจไปแล้ว -->
-        <div style="flex: 1; background: #ffffff; border-left: 5px solid #0ea5e9; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;">
-            <div style="font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px;">📊 ตรวจไปแล้วทั้งหมด</div>
-            <div style="font-size: 22px; color: #0f172a; font-weight: 700;">1,250 <span style="font-size: 12px; color: #94a3b8; font-weight: 400;">โครงการ</span></div>
-        </div>
+    # 📊 แผงสถิติ Dashboard (Quick Key Metrics) - ใช้ () เพื่อป้องกันปัญหาเว้นวรรค
+    dashboard_html = (
+        "<div style='display: flex; gap: 15px; margin-bottom: 25px; font-family: \"Kanit\", sans-serif;'>"
         
-        <!-- ส่วนที่ 2: เวลาเฉลี่ย -->
-        <div style="flex: 1; background: #ffffff; border-left: 5px solid #10b981; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;">
-            <div style="font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px;">⏱️ เวลาตรวจเฉลี่ย</div>
-            <div style="font-size: 22px; color: #0f172a; font-weight: 700;">~45 <span style="font-size: 12px; color: #94a3b8; font-weight: 400;">วินาที</span></div>
-        </div>
+        "<!-- ส่วนที่ 1: ตรวจไปแล้ว -->"
+        "<div style='flex: 1; background: #ffffff; border-left: 5px solid #0ea5e9; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;'>"
+        "<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px;'>📊 ตรวจไปแล้วทั้งหมด</div>"
+        "<div style='font-size: 22px; color: #0f172a; font-weight: 700;'>1,250 <span style='font-size: 12px; color: #94a3b8; font-weight: 400;'>โครงการ</span></div>"
+        "</div>"
         
-        <!-- ส่วนที่ 3: ช่วงคะแนน -->
-        <div style="flex: 1.2; background: #ffffff; border-left: 5px solid #f59e0b; border-radius: 10px; padding: 10px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-            <div style="font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px; text-align: center;">🎯 สัดส่วนคะแนนคุณภาพ</div>
-            <div style="display: flex; justify-content: space-around; margin-top: 5px;">
-                <div style="text-align: center;">
-                    <div style="font-size: 18px; color: #166534; font-weight: 700;">120</div>
-                    <div style="font-size: 11px; color: #94a3b8;">90-100 คะแนน</div>
-                </div>
-                <div style="width: 1px; background-color: #e2e8f0; margin: 0 5px;"></div>
-                <div style="text-align: center;">
-                    <div style="font-size: 18px; color: #0284c7; font-weight: 700;">345</div>
-                    <div style="font-size: 11px; color: #94a3b8;">80-89 คะแนน</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    """
+        "<!-- ส่วนที่ 2: เวลาเฉลี่ย -->"
+        "<div style='flex: 1; background: #ffffff; border-left: 5px solid #10b981; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;'>"
+        "<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px;'>⏱️ เวลาตรวจเฉลี่ย</div>"
+        "<div style='font-size: 22px; color: #0f172a; font-weight: 700;'>~45 <span style='font-size: 12px; color: #94a3b8; font-weight: 400;'>วินาที</span></div>"
+        "</div>"
+        
+        "<!-- ส่วนที่ 3: ช่วงคะแนน -->"
+        "<div style='flex: 1.2; background: #ffffff; border-left: 5px solid #f59e0b; border-radius: 10px; padding: 10px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);'>"
+        "<div style='font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 5px; text-align: center;'>🎯 สัดส่วนคะแนนคุณภาพ</div>"
+        "<div style='display: flex; justify-content: space-around; margin-top: 5px;'>"
+        "<div style='text-align: center;'>"
+        "<div style='font-size: 18px; color: #166534; font-weight: 700;'>120</div>"
+        "<div style='font-size: 11px; color: #94a3b8;'>90-100 คะแนน</div>"
+        "</div>"
+        "<div style='width: 1px; background-color: #e2e8f0; margin: 0 5px;'></div>"
+        "<div style='text-align: center;'>"
+        "<div style='font-size: 18px; color: #0284c7; font-weight: 700;'>345</div>"
+        "<div style='font-size: 11px; color: #94a3b8;'>80-89 คะแนน</div>"
+        "</div>"
+        "</div>"
+        "</div>"
+        
+        "</div>"
+    )
+    
     st.markdown(dashboard_html, unsafe_allow_html=True)
     
     st.markdown("### 🤖 2. ผลการวิเคราะห์จาก AI")
+    
+    # ... (ส่วนโค้ดด้านล่างปล่อยไว้ตามเดิมได้เลยครับ) ...
     
     # ... (ส่วนโค้ดการตรวจของ AI เช่น กล่องติ๊กยอมรับ PDPA และปุ่มเริ่มตรวจ จะต่อจากบรรทัดนี้เลยครับ) ...
     
