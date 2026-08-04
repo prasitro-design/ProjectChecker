@@ -393,7 +393,7 @@ with st.sidebar:
             st.image("logo.png", use_container_width=True) 
         except FileNotFoundError:
             pass
-            
+    st.markdown("### 📌 คำแนะนำการใช้งาน")     
 # 📌 การ์ดแสดงขั้นตอนแบบ Visual (Process Stepper)
     st.markdown("""
     <div style="font-family: 'Kanit', sans-serif; margin-top: 10px;">
