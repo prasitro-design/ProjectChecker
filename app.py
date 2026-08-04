@@ -722,12 +722,12 @@ dashboard_html = f"""
             <div class="score-container">
                 <div class="score-box">
                     <div id="count_90" class="gradient-text score-num score-90">0</div>
-                    <div class="score-label">ยอดเยี่ยม (90-100)</div>
+                    <div class="score-label">ดีมาก (90-100)</div>
                 </div>
                 <div class="divider"></div>
                 <div class="score-box">
                     <div id="count_80" class="gradient-text score-num score-80">0</div>
-                    <div class="score-label">ดีมาก (80-89)</div>
+                    <div class="score-label">ดี (80-89)</div>
                 </div>
                 <div class="divider"></div>
                 <div class="score-box">
