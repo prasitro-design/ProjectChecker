@@ -61,11 +61,6 @@ st.markdown("""
             50% { transform: translate(4px, -6px) rotate(-5deg); }
             100% { transform: translate(0, 0) rotate(0deg); }
         }
-        @keyframes blueDartShoot {
-            0% { opacity: 0; transform: translate(-20px, -20px) rotate(45deg); }
-            40% { opacity: 1; transform: translate(-5px, -5px) rotate(45deg); }
-            60%, 100% { opacity: 0; transform: translate(0px, 0px) rotate(45deg); }
-        }
         @keyframes handPoint {
             0%, 100% { transform: translateX(0px); }
             50% { transform: translateX(6px); }
@@ -104,21 +99,6 @@ st.markdown("""
         .anim-rocket {
             display: inline-block;
             animation: rocketLaunch 1.4s ease-in-out infinite;
-        }
-        
-        .anim-dart {
-            display: inline-block;
-            position: relative;
-        }
-        .anim-dart::after {
-            content: '➤';
-            color: #0ea5e9;
-            position: absolute;
-            top: -5px;
-            left: -12px;
-            font-size: 0.8em;
-            font-weight: 900;
-            animation: blueDartShoot 1.5s infinite ease-out;
         }
         
         .anim-hand {
@@ -751,29 +731,20 @@ dashboard_html = f"""
             50% {{ transform: translate(4px, -6px) rotate(-5deg); }}
             100% {{ transform: translate(0, 0) rotate(0deg); }}
         }}
-        @keyframes blueDartShoot {{
-            0% {{ opacity: 0; transform: translate(-20px, -20px) rotate(45deg); }}
-            40% {{ opacity: 1; transform: translate(-5px, -5px) rotate(45deg); }}
-            60%, 100% {{ opacity: 0; transform: translate(0px, 0px) rotate(45deg); }}
+        
+        @keyframes dartInTarget {{
+            0% {{ transform: translate(-15px, -15px); opacity: 0; }}
+            30% {{ transform: translate(0px, 0px); opacity: 1; }}
+            80%, 100% {{ transform: translate(0px, 0px); opacity: 1; }}
         }}
 
         .anim-rocket {{
             display: inline-block;
             animation: rocketLaunch 1.4s ease-in-out infinite;
         }}
-        .anim-dart {{
-            display: inline-block;
-            position: relative;
-        }}
-        .anim-dart::after {{
-            content: '➤';
-            color: #0ea5e9;
-            position: absolute;
-            top: -5px;
-            left: -12px;
-            font-size: 0.8em;
-            font-weight: 900;
-            animation: blueDartShoot 1.5s infinite ease-out;
+        
+        .anim-blue-dart {{
+            animation: dartInTarget 1.5s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
         }}
 
         .ai-card {{
@@ -854,7 +825,20 @@ dashboard_html = f"""
         
         <!-- ส่วนที่ 2: สัดส่วนคะแนน -->
         <div class="ai-card card-2">
-            <div class="title"><span class="anim-dart">🎯</span> สัดส่วนคะแนนคุณภาพ</div>
+            <div class="title">
+                <svg width="18" height="18" viewBox="0 0 24 24" style="display:inline-block; vertical-align:-3px; margin-right: 4px;">
+                    <!-- เป้าสีขาวแดง (อยู่นิ่งๆ) -->
+                    <circle cx="12" cy="12" r="11" fill="#ef4444"/>
+                    <circle cx="12" cy="12" r="7.5" fill="#ffffff"/>
+                    <circle cx="12" cy="12" r="4" fill="#ef4444"/>
+                    <!-- ลูกดอกสีฟ้า (พุ่งเข้าหาเป้าอย่างเดียว) -->
+                    <g class="anim-blue-dart">
+                        <line x1="1" y1="1" x2="12" y2="12" stroke="#94a3b8" stroke-width="2"/>
+                        <polygon points="1,1 8,2 2,8" fill="#3b82f6"/>
+                    </g>
+                </svg> 
+                สัดส่วนคะแนนคุณภาพ
+            </div>
             <div class="score-container">
                 <div class="score-box">
                     <div id="count_90" class="gradient-text score-num score-90">0</div>
