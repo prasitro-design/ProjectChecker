@@ -184,8 +184,21 @@ def set_background(image_file):
             }}
 
             /* ==========================================
-               🎨 กรอบ 2 ฝั่ง (ยกเว้น Sidebar)
+               🎨 กรอบ 2 ฝั่ง (รองรับหน้าจอคอมพิวเตอร์และแท็บเล็ต)
                ========================================== */
+            
+            /* จัดการ Layout ของ Streamlit columns ให้รองรับ Tablet (Stack เมื่อจอเล็กกว่า 1024px) */
+            @media (max-width: 1024px) {{
+                [data-testid="stHorizontalBlock"] {{
+                    flex-direction: column !important;
+                    gap: 20px !important;
+                }}
+                [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {{
+                    width: 100% !important;
+                    flex: 1 1 100% !important;
+                    min-width: 100% !important;
+                }}
+            }}
 
             /* 📁 คอลัมน์ซ้าย (อัปโหลดเอกสาร) */
             [data-testid="stColumn"]:not([data-testid="stSidebar"] *):nth-child(1),
