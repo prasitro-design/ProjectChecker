@@ -499,11 +499,10 @@ st.markdown("""
         ฝ่ายพัฒนานิสิต คณะศึกษาศาสตร์ มก
     </div>
     <div class="nav-links">
-        <a href="https://sites.google.com/ku.th/pdeduku?usp=sharing" target="_blank"><i class="fa-solid fa-house"></i> หน้าแรก</a>
+        <a href="https://drive.google.com/drive/u/1/folders/1HDGo2ImRk_Szo5gXn5JnCXsu6swffRux" target="_blank"><i class="fa-solid fa-download"></i> ดาวโหลดแบบฟอร์มต่าง ๆ</a>
         <a href="https://stdregis.ku.ac.th/" target="_blank"><i class="fa-solid fa-user-graduate"></i> ระบบสารสนเทศนิสิต</a>
         <a href="https://mis.edu.ku.ac.th/e-portfolio-web/public/login/home" target="_blank"><i class="fa-solid fa-folder-open"></i> ระบบ EDU-KU E-Portfolio</a>
         <a href="https://www.edu.ku.ac.th/" target="_blank"><i class="fa-solid fa-globe"></i> เว็บไซต์คณะศึกษาศาสตร์</a>
-        <a href="https://drive.google.com/file/d/1D1exkHAlTsieLjaSxML0SSXeuaOGyEyM/view?usp=sharing" target="_blank"><i class="fa-solid fa-calendar-days"></i> ปฏิทินการฝึกสอน</a>
     </div>
 </div>
 
