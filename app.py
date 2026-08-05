@@ -86,76 +86,89 @@ def set_background(image_file):
                 }}
             }}
 
-            @keyframes shimmerEffect {{
-                0% {{ background-position: -200% center; }}
-                100% {{ background-position: 200% center; }}
-            }}
-
-            @keyframes glowPulse {{
-                0%, 100% {{ filter: drop-shadow(0 0 2px rgba(0, 102, 51, 0.2)); }}
-                50% {{ filter: drop-shadow(0 0 12px rgba(150, 201, 61, 0.8)); }}
-            }}
-
-            @keyframes alertPulse {{
-                0%, 100% {{
-                    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
-                    transform: scale(1);
-                }}
-                50% {{
-                    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
-                    transform: scale(1.008);
-                }}
-            }}
-
             /* ==========================================
-               📌 HEADER BOX
+               📌 HEADER BOX (New Top Nav & Purple Banner)
                ========================================== */
-            .header-box {{
-                background-color: #f4fbf7;
-                border: 2px solid #bce1ce;
-                border-radius: 20px;
-                padding: 35px 20px 40px 20px;
-                margin-bottom: 30px;
-                box-shadow: 0 8px 20px rgba(0, 102, 51, 0.08);
-                text-align: center;
-                animation: fadeInUpSmooth 3s cubic-bezier(0.16, 1, 0.3, 1) both;
-            }}
-
-            h1 {{
-                background: linear-gradient(
-                    110deg, 
-                    #006633 0%, 
-                    #006633 30%, 
-                    #96c93d 45%, 
-                    #ffffff 50%, 
-                    #96c93d 55%, 
-                    #006633 70%, 
-                    #006633 100%
-                );
-                background-size: 200% auto;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                animation: shimmerEffect 4s linear infinite, glowPulse 3s ease-in-out infinite;
-                font-weight: 600;
-                text-align: center;
-                margin: 0; 
-                padding: 0;
-                line-height: 1.4;
-            }}
-
-            .subtitle-text {{
-                text-align: center;
-                font-size: 16px;
-                color: #006633;
+            .custom-navbar {{
                 background-color: #ffffff;
-                padding: 8px 25px;
-                border-radius: 30px;
-                display: inline-block;
-                margin-top: 18px;
-                border: 1px solid #e0f2e9;
-                box-shadow: 0 4px 10px rgba(0, 102, 51, 0.05);
-                font-weight: 400;
-                animation: fadeInUpSmooth 2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 15px 30px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+                border-radius: 20px 20px 0 0;
+                margin-top: -3rem;
+                margin-left: -2rem;
+                margin-right: -2rem;
+                border-bottom: 1px solid #E2E8F0;
+            }}
+            .nav-brand {{
+                font-size: 15px;
+                font-weight: 700;
+                color: #581c87;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }}
+            .nav-brand img {{
+                height: 32px;
+                width: auto;
+                object-fit: contain;
+            }}
+            .nav-links {{
+                display: flex;
+                gap: 20px;
+                align-items: center;
+            }}
+            .nav-links a {{
+                text-decoration: none;
+                color: #64748B;
+                font-weight: 500;
+                font-size: 14px;
+                transition: color 0.3s;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }}
+            .nav-links a:hover {{
+                color: #7c3aed;
+            }}
+            
+            .hero-section {{
+                background: linear-gradient(135deg, #581c87, #7c3aed);
+                color: white;
+                padding: 45px 5%; 
+                text-align: center;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                margin-left: -2rem;
+                margin-right: -2rem;
+                margin-bottom: 30px;
+                animation: fadeInUpSmooth 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+            }}
+            .hero-section h1 {{
+                font-size: 28px !important;
+                font-weight: 700 !important;
+                margin-bottom: 10px !important;
+                color: white !important;
+                background: none !important;
+                -webkit-text-fill-color: white !important;
+                animation: none !important;
+                text-align: center;
+                padding: 0;
+            }}
+            .hero-section p {{
+                font-size: 18px;
+                font-weight: 300;
+                opacity: 0.9;
+                margin: 0;
+                color: #f3e8ff;
+                text-align: center;
+            }}
+            @media (max-width: 900px) {{
+                .nav-links {{ display: none; }}
+                .custom-navbar {{ justify-content: center; }}
+                .hero-section h1 {{ font-size: 1.2rem !important; }}
+                .hero-section p {{ font-size: 1rem; }}
             }}
 
             /* ==========================================
@@ -246,43 +259,7 @@ def set_background(image_file):
         pass
 
 set_background('background.jpg')
-# ==========================================
-# 📢 แถบประกาศข่าวสารสำคัญ (Top Announcement Banner)
-# ==========================================
-st.markdown("""
-<div style="
-    background: linear-gradient(90deg, #fde0dc 0%, #ffffff 100%);
-    border-left: 6px solid #e84e40;
-    border-radius: 8px;
-    padding: 15px 20px;
-    margin-bottom: 25px;
-    margin-top: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s ease;
-">
-    <div style="font-size: 24px; margin-right: 15px; animation: pulse 2s infinite;">
-        📢
-    </div>
-    <div>
-        <h4 style="margin: 0; color: #166534; font-size: 16px; font-weight: 600; padding-bottom: 3px;">
-            ประกาศจากฝ่ายพัฒนานิสิต
-        </h4>
-        <p style="margin: 0; color: #4b5563; font-size: 14px; font-weight: 400;">
-            เปิดรับโครงการที่จะนำเสนอในรอบเดือนสิงหาคม 2569 ตั้งแต่วันนี้ - 10 สิงหาคม 2569 | โดยส่งโครงการที่จะนำเสนอได้ที่ศูนย์ฝึกประสบการณ์วิชาชีพ อาคาร 2 ชั้น 1
-        </p>
-    </div>
-</div>
 
-<style>
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-    100% { transform: scale(1); }
-}
-</style>
-""", unsafe_allow_html=True)
 # ==========================================
 # 3. ตั้งค่า API Key ของ Gemini
 # ==========================================
@@ -485,13 +462,30 @@ with st.sidebar:
     # ใช้ components.html เพื่อรัน JavaScript 
     # (อาจต้องปรับค่า height ให้พอดีกับขนาดของป้าย Counter)
     components.html(counter_html, height=120)
+
 # ==========================================
 # 6. ส่วนแสดงผลเนื้อหาหลัก
 # ==========================================
 st.markdown("""
-<div class="header-box">
-    <h1>ระบบตรวจแบบฟอร์มเสนอโครงการพัฒนานิสิต<br>คณะศึกษาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์</h1>
-    <div class="subtitle-text">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<div class="custom-navbar">
+    <div class="nav-brand">
+        <img src="https://lh3.googleusercontent.com/d/1Ib-E-X35YqI8vQl7wpar_UXdoQYdc_1N" alt="Logo KU">
+        ฝ่ายพัฒนานิสิต คณะศึกษาศาสตร์ มก
+    </div>
+    <div class="nav-links">
+        <a href="https://sites.google.com/ku.th/pdeduku?usp=sharing" target="_blank"><i class="fa-solid fa-house"></i> หน้าแรก</a>
+        <a href="https://stdregis.ku.ac.th/" target="_blank"><i class="fa-solid fa-user-graduate"></i> ระบบสารสนเทศนิสิต</a>
+        <a href="https://mis.edu.ku.ac.th/e-portfolio-web/public/login/home" target="_blank"><i class="fa-solid fa-folder-open"></i> ระบบ EDU-KU E-Portfolio</a>
+        <a href="https://www.edu.ku.ac.th/" target="_blank"><i class="fa-solid fa-globe"></i> เว็บไซต์คณะศึกษาศาสตร์</a>
+        <a href="https://drive.google.com/file/d/1D1exkHAlTsieLjaSxML0SSXeuaOGyEyM/view?usp=sharing" target="_blank"><i class="fa-solid fa-calendar-days"></i> ปฏิทินการฝึกสอน</a>
+    </div>
+</div>
+
+<div class="hero-section">
+    <h1>ระบบตรวจแบบฟอร์มโครงการพัฒนานิสิต</h1>
+    <p>คณะศึกษาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์</p>
+    <div style="margin-top: 15px; font-size: 15px; background-color: rgba(255,255,255,0.15); display: inline-block; padding: 8px 25px; border-radius: 30px; font-weight: 400; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         ✨ ระบบการตรวจสอบโครงสร้าง การสะกดคำ และความสมเหตุสมผลของโครงการ โดยใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) เพื่อใช้เป็นแนวทางในการปรับปรุงเอกสารเบื้องต้น ก่อนนำเสนอคณะกรรมการฝ่ายพัฒนานิสิต ✨
     </div>
 </div>
@@ -777,4 +771,4 @@ dashboard_html = f"""
 """
 
 # ปรับความสูงเพิ่มเป็น 200px เพื่อเผื่อระยะที่กล่องเริ่มลอยจากด้านล่าง (ไม่ให้โดนตัดขอบตอนเริ่มโผล่)
-components.html(dashboard_html, height=100)
+components.html(dashboard_html, height=200)
