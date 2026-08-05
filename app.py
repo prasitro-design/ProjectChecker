@@ -21,13 +21,17 @@ st.set_page_config(
     page_title="ระบบตรวจแบบฟอร์มโครงการพัฒนานิสิต คณะศึกษาศาสตร์ มก.", 
     page_icon="📄", 
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 # ==========================================
 # 🎨 ตั้งค่า CSS เพื่อลดช่องว่างด้านบนของเว็บ
 # ==========================================
 st.markdown("""
     <style>
+        /* ซ่อนสไลด์บาร์และปุ่มย่อ/ขยายสไลด์บาร์ */
+        [data-testid="stSidebar"], [data-testid="collapsedControl"] {
+            display: none !important;
+        }
         /* ลดช่องว่างด้านบนของพื้นที่แสดงผลหลัก */
         .block-container {
             padding-top: 0rem !important; 
