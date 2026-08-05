@@ -777,4 +777,4 @@ dashboard_html = f"""
 """
 
 # ปรับความสูงเพิ่มเป็น 200px เพื่อเผื่อระยะที่กล่องเริ่มลอยจากด้านล่าง (ไม่ให้โดนตัดขอบตอนเริ่มโผล่)
-components.html(dashboard_html, height=200)
+components.html(dashboard_html, height=100)
