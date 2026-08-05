@@ -69,6 +69,15 @@ st.markdown("""
             0% { opacity: 0.3; transform: scale(0.8); }
             100% { opacity: 1; transform: scale(1.2); }
         }
+        
+        /* 📈 แอนิเมชันสำหรับกราฟเส้นค่อยๆ ไต่ระดับ */
+        @keyframes climbLine {
+            0% { stroke-dasharray: 60; stroke-dashoffset: 60; }
+            60%, 100% { stroke-dasharray: 60; stroke-dashoffset: 0; }
+        }
+        @keyframes fadeDot1 { 0%, 15% { opacity: 0; transform: scale(0); } 25%, 100% { opacity: 1; transform: scale(1); } }
+        @keyframes fadeDot2 { 0%, 30% { opacity: 0; transform: scale(0); } 40%, 100% { opacity: 1; transform: scale(1); } }
+        @keyframes fadeDot3 { 0%, 45% { opacity: 0; transform: scale(0); } 55%, 100% { opacity: 1; transform: scale(1); } }
 
         .anim-folder {
             display: inline-block;
@@ -110,6 +119,15 @@ st.markdown("""
             display: inline-block;
             animation: starBlink 0.8s infinite alternate ease-in-out;
         }
+
+        .anim-line-chart {
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            animation: climbLine 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        .anim-dot-1 { transform-origin: 9px 10px; animation: fadeDot1 2.5s infinite; }
+        .anim-dot-2 { transform-origin: 15px 14px; animation: fadeDot2 2.5s infinite; }
+        .anim-dot-3 { transform-origin: 21px 4px; animation: fadeDot3 2.5s infinite; }
     </style>
 """, unsafe_allow_html=True)
 # ==========================================
@@ -670,7 +688,11 @@ with col2:
 st.write("") 
 st.write("") 
 st.markdown("---") 
-st.markdown("<h4 style='text-align: center; color: #475569; font-family: \"Kanit\", sans-serif; margin-bottom: 25px; letter-spacing: 0.5px;'><span class='anim-star'>✨</span> สถิติการประเมินโครงการภาพรวม <span class='anim-star'>✨</span></h4>", unsafe_allow_html=True)
+
+# เพิ่ม SVG Animated Icon แทนที่ไอคอนดาว
+svg_chart = """<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-6px; margin: 0 4px;"><polyline points="3 18 9 10 15 14 21 4" class="anim-line-chart"></polyline><circle cx="9" cy="10" r="2.5" fill="#f59e0b" stroke="none" class="anim-dot-1"></circle><circle cx="15" cy="14" r="2.5" fill="#f59e0b" stroke="none" class="anim-dot-2"></circle><circle cx="21" cy="4" r="2.5" fill="#f59e0b" stroke="none" class="anim-dot-3"></circle></svg>"""
+
+st.markdown(f"<h4 style='text-align: center; color: #475569; font-family: \"Kanit\", sans-serif; margin-bottom: 25px; letter-spacing: 0.5px;'>{svg_chart} สถิติการประเมินโครงการภาพรวม {svg_chart}</h4>", unsafe_allow_html=True)
 
 try:
     sheet_id = "1jQVFbiKKQjxJVk8HHwLVzNlNDWyA2CPQSnNsVAz3aNk"
