@@ -46,51 +46,89 @@ st.markdown("""
         }
 
         /* 🎬 แอนิเมชันเฉพาะตัวตามที่สั่ง */
-        @keyframes folderOpenClose {
-            0% { transform: scaleX(1); }
-            50% { transform: scaleX(0.82) skewX(-8deg); }
-            100% { transform: scaleX(1); }
+        @keyframes paperFlyIn {
+            0% { opacity: 0; transform: translate(15px, -15px) scale(0.5); }
+            50% { opacity: 1; transform: translate(5px, -5px) scale(1); }
+            100% { opacity: 0; transform: translate(0px, 0px) scale(0.2); }
         }
-        @keyframes robotBlink {
-            0%, 90%, 100% { transform: scaleY(1); }
-            95% { transform: scaleY(0.1); }
+        @keyframes speechPop {
+            0%, 20% { opacity: 0; transform: scale(0.5) translateY(5px); }
+            50%, 80% { opacity: 1; transform: scale(1) translateY(0px); }
+            100% { opacity: 0; transform: scale(0.5) translateY(-5px); }
         }
         @keyframes rocketLaunch {
             0% { transform: translate(0, 0) rotate(0deg); }
             50% { transform: translate(4px, -6px) rotate(-5deg); }
             100% { transform: translate(0, 0) rotate(0deg); }
         }
-        @keyframes dartShoot {
-            0% { transform: translate(-8px, 4px) scale(0.9); opacity: 0.6; }
-            50% { transform: translate(0px, 0px) scale(1.1); opacity: 1; }
-            100% { transform: translate(-8px, 4px) scale(0.9); opacity: 0.6; }
+        @keyframes blueDartShoot {
+            0% { opacity: 0; transform: translate(-20px, -20px) rotate(45deg); }
+            40% { opacity: 1; transform: translate(-5px, -5px) rotate(45deg); }
+            60%, 100% { opacity: 0; transform: translate(0px, 0px) rotate(45deg); }
         }
         @keyframes handPoint {
             0%, 100% { transform: translateX(0px); }
             50% { transform: translateX(6px); }
         }
+        @keyframes starBlink {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
 
         .anim-folder {
             display: inline-block;
-            animation: folderOpenClose 1.8s ease-in-out infinite;
-            transform-origin: left center;
+            position: relative;
         }
+        .anim-folder::after {
+            content: '📄';
+            position: absolute;
+            top: -10px;
+            right: -15px;
+            font-size: 0.7em;
+            animation: paperFlyIn 2s infinite;
+        }
+        
         .anim-robot {
             display: inline-block;
-            animation: robotBlink 3.5s ease-in-out infinite;
-            transform-origin: center;
+            position: relative;
         }
+        .anim-robot::after {
+            content: '💬';
+            position: absolute;
+            top: -12px;
+            right: -15px;
+            font-size: 0.7em;
+            animation: speechPop 2.5s infinite;
+        }
+        
         .anim-rocket {
             display: inline-block;
             animation: rocketLaunch 1.4s ease-in-out infinite;
         }
+        
         .anim-dart {
             display: inline-block;
-            animation: dartShoot 1.2s ease-in-out infinite;
+            position: relative;
         }
+        .anim-dart::after {
+            content: '➤';
+            color: #0ea5e9;
+            position: absolute;
+            top: -5px;
+            left: -12px;
+            font-size: 0.8em;
+            font-weight: 900;
+            animation: blueDartShoot 1.5s infinite ease-out;
+        }
+        
         .anim-hand {
             display: inline-block;
             animation: handPoint 1s ease-in-out infinite;
+        }
+        
+        .anim-star {
+            display: inline-block;
+            animation: starBlink 0.8s infinite alternate ease-in-out;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -558,7 +596,7 @@ st.markdown("""
     <h1>ระบบตรวจแบบฟอร์มโครงการพัฒนานิสิต</h1>
     <p>คณะศึกษาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์</p>
     <div style="margin-top: 15px; font-size: 15px; background-color: rgba(255,255,255,0.15); display: inline-block; padding: 8px 25px; border-radius: 30px; font-weight: 400; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-        ✨ ระบบการตรวจสอบโครงสร้าง การสะกดคำ และความสมเหตุสมผลของโครงการ โดยใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) เพื่อใช้เป็นแนวทางในการปรับปรุงเอกสารเบื้องต้น ก่อนนำเสนอคณะกรรมการฝ่ายพัฒนานิสิต ✨
+        <span class="anim-star">✨</span> ระบบการตรวจสอบโครงสร้าง การสะกดคำ และความสมเหตุสมผลของโครงการ โดยใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) เพื่อใช้เป็นแนวทางในการปรับปรุงเอกสารเบื้องต้น ก่อนนำเสนอคณะกรรมการฝ่ายพัฒนานิสิต <span class="anim-star">✨</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -591,7 +629,7 @@ with col1:
 # 📊 คอลัมน์ที่ 2
 # ==========================================
 with col2:
-    st.markdown("### <span class='anim-robot'>🤖</span>2. ผลการวิเคราะห์จาก AI", unsafe_allow_html=True)
+    st.markdown("### <span class='anim-robot'>🤖</span> 2. ผลการวิเคราะห์จาก AI", unsafe_allow_html=True)
     
     # ... (ส่วนโค้ดด้านล่างปล่อยไว้ตามเดิมได้เลยครับ) ...
     
@@ -652,7 +690,7 @@ with col2:
 st.write("") 
 st.write("") 
 st.markdown("---") 
-st.markdown("<h4 style='text-align: center; color: #475569; font-family: \"Kanit\", sans-serif; margin-bottom: 25px; letter-spacing: 0.5px;'>✨ สถิติการประเมินโครงการภาพรวม</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: #475569; font-family: \"Kanit\", sans-serif; margin-bottom: 25px; letter-spacing: 0.5px;'><span class='anim-star'>✨</span> สถิติการประเมินโครงการภาพรวม <span class='anim-star'>✨</span></h4>", unsafe_allow_html=True)
 
 try:
     sheet_id = "1jQVFbiKKQjxJVk8HHwLVzNlNDWyA2CPQSnNsVAz3aNk"
@@ -713,10 +751,10 @@ dashboard_html = f"""
             50% {{ transform: translate(4px, -6px) rotate(-5deg); }}
             100% {{ transform: translate(0, 0) rotate(0deg); }}
         }}
-        @keyframes dartShoot {{
-            0% {{ transform: translate(-8px, 4px) scale(0.9); opacity: 0.6; }}
-            50% {{ transform: translate(0px, 0px) scale(1.1); opacity: 1; }}
-            100% {{ transform: translate(-8px, 4px) scale(0.9); opacity: 0.6; }}
+        @keyframes blueDartShoot {{
+            0% {{ opacity: 0; transform: translate(-20px, -20px) rotate(45deg); }}
+            40% {{ opacity: 1; transform: translate(-5px, -5px) rotate(45deg); }}
+            60%, 100% {{ opacity: 0; transform: translate(0px, 0px) rotate(45deg); }}
         }}
 
         .anim-rocket {{
@@ -725,7 +763,17 @@ dashboard_html = f"""
         }}
         .anim-dart {{
             display: inline-block;
-            animation: dartShoot 1.2s ease-in-out infinite;
+            position: relative;
+        }}
+        .anim-dart::after {{
+            content: '➤';
+            color: #0ea5e9;
+            position: absolute;
+            top: -5px;
+            left: -12px;
+            font-size: 0.8em;
+            font-weight: 900;
+            animation: blueDartShoot 1.5s infinite ease-out;
         }}
 
         .ai-card {{
