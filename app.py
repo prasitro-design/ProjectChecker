@@ -32,11 +32,13 @@ st.markdown("""
         [data-testid="stSidebar"], [data-testid="collapsedControl"] {
             display: none !important;
         }
-        /* ลดช่องว่างด้านบนของพื้นที่แสดงผลหลัก */
+        /* ลดช่องว่างด้านบนของพื้นที่แสดงผลหลัก และขยายให้เต็มความกว้างจอ */
         .block-container {
             padding-top: 0rem !important; 
             padding-bottom: 0rem !important;
-            max-width: 1300px !important;
+            max-width: 100% !important;
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;
         }
         /* ซ่อนเมนู Header ด้านบนสุด (พวกปุ่ม Deploy, Menu) ถ้าต้องการให้ดูคลีนขึ้น */
         header {
@@ -65,11 +67,12 @@ def set_background(image_file):
             }}
             .block-container {{
                 background-color: rgba(255, 255, 255, 0.95); 
-                border-radius: 20px;
-                padding: 2.5rem 2rem;
-                margin-top: 1.5rem;
-                margin-bottom: 1.5rem;
+                border-radius: 0px;
+                padding: 2.5rem 3rem;
+                margin-top: 0rem;
+                margin-bottom: 0rem;
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                max-width: 100% !important;
             }}
             @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap');
             html, body, [class*="css"] {{
@@ -99,18 +102,18 @@ def set_background(image_file):
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 15px 30px;
+                padding: 15px 40px;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-                border-radius: 20px 20px 0 0;
+                border-radius: 0px;
                 margin-top: -2.5rem;
-                margin-left: -2rem;
-                margin-right: -2rem;
+                margin-left: -3rem;
+                margin-right: -3rem;
                 border-bottom: 1px solid #E2E8F0;
                 flex-wrap: wrap;
                 gap: 10px;
             }}
             .nav-brand {{
-                font-size: 15px;
+                font-size: 16px;
                 font-weight: 700;
                 color: #581c87;
                 display: flex;
@@ -124,7 +127,7 @@ def set_background(image_file):
             }}
             .nav-links {{
                 display: flex;
-                gap: 15px;
+                gap: 20px;
                 align-items: center;
                 flex-wrap: wrap;
             }}
@@ -132,11 +135,11 @@ def set_background(image_file):
                 text-decoration: none;
                 color: #64748B;
                 font-weight: 500;
-                font-size: 13.5px;
+                font-size: 14px;
                 transition: color 0.3s;
                 display: flex;
                 align-items: center;
-                gap: 5px;
+                gap: 6px;
                 white-space: nowrap;
             }}
             .nav-links a:hover {{
@@ -146,18 +149,18 @@ def set_background(image_file):
             .hero-section {{
                 background: linear-gradient(135deg, #581c87, #7c3aed);
                 color: white;
-                padding: 35px 5%; 
+                padding: 40px 5%; 
                 text-align: center;
                 box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-                margin-left: -2rem;
-                margin-right: -2rem;
-                margin-bottom: 25px;
+                margin-left: -3rem;
+                margin-right: -3rem;
+                margin-bottom: 30px;
                 animation: fadeInUpSmooth 1s cubic-bezier(0.16, 1, 0.3, 1) both;
             }}
             .hero-section h1 {{
-                font-size: 26px !important;
+                font-size: 32px !important;
                 font-weight: 700 !important;
-                margin-bottom: 8px !important;
+                margin-bottom: 10px !important;
                 color: white !important;
                 background: none !important;
                 -webkit-text-fill-color: white !important;
@@ -166,7 +169,7 @@ def set_background(image_file):
                 padding: 0;
             }}
             .hero-section p {{
-                font-size: 16px;
+                font-size: 18px;
                 font-weight: 300;
                 opacity: 0.9;
                 margin: 0;
@@ -175,9 +178,9 @@ def set_background(image_file):
             }}
             @media (max-width: 1024px) {{
                 .nav-links {{ display: none; }}
-                .custom-navbar {{ justify-content: center; }}
-                .hero-section h1 {{ font-size: 1.2rem !important; }}
-                .hero-section p {{ font-size: 0.95rem; }}
+                .custom-navbar {{ justify-content: center; padding: 15px 20px; }}
+                .hero-section h1 {{ font-size: 22px !important; }}
+                .hero-section p {{ font-size: 15px; }}
             }}
 
             /* ==========================================
@@ -190,7 +193,7 @@ def set_background(image_file):
                 background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%) !important;
                 border: 2px solid #10b981 !important;
                 border-radius: 20px !important;
-                padding: 20px 18px !important;
+                padding: 24px 22px !important;
                 box-shadow: 0 10px 25px rgba(16, 185, 129, 0.12) !important;
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both !important;
             }}
@@ -201,7 +204,7 @@ def set_background(image_file):
                 background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%) !important;
                 border: 2px solid #0284c7 !important;
                 border-radius: 20px !important;
-                padding: 20px 18px !important;
+                padding: 24px 22px !important;
                 box-shadow: 0 10px 25px rgba(2, 132, 199, 0.12) !important;
                 animation: fadeInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both !important;
             }}
@@ -215,10 +218,10 @@ def set_background(image_file):
                 background: linear-gradient(135deg, #006633, #00b09b);
                 color: white !important;
                 font-weight: 500;
-                font-size: 15px;
+                font-size: 16px;
                 border-radius: 12px;
                 border: none;
-                padding: 10px 20px;
+                padding: 12px 24px;
                 box-shadow: 0 4px 15px rgba(0, 102, 51, 0.3);
                 transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                 width: 100%;
@@ -233,7 +236,7 @@ def set_background(image_file):
                 background-color: #ffffff;
                 border: 2px dashed #10b981;
                 border-radius: 15px;
-                padding: 15px;
+                padding: 20px;
                 transition: all 0.3s ease;
             }}
             [data-testid="stFileUploadDropzone"]:hover {{
@@ -252,7 +255,7 @@ def set_background(image_file):
             }}
             [data-testid="stStatusWidget"] summary label, 
             [data-testid="stStatusWidget"] summary span {{
-                font-size: 17px !important;
+                font-size: 19px !important;
                 font-weight: 600 !important;
                 color: #e65100 !important;
             }}
@@ -494,7 +497,7 @@ st.markdown("""
 <div class="hero-section">
     <h1>ระบบตรวจแบบฟอร์มโครงการพัฒนานิสิต</h1>
     <p>คณะศึกษาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์</p>
-    <div style="margin-top: 12px; font-size: 14px; background-color: rgba(255,255,255,0.15); display: inline-block; padding: 6px 20px; border-radius: 30px; font-weight: 400; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <div style="margin-top: 15px; font-size: 15px; background-color: rgba(255,255,255,0.15); display: inline-block; padding: 8px 25px; border-radius: 30px; font-weight: 400; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         ✨ ระบบการตรวจสอบโครงสร้าง การสะกดคำ และความสมเหตุสมผลของโครงการ โดยใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) เพื่อใช้เป็นแนวทางในการปรับปรุงเอกสารเบื้องต้น ก่อนนำเสนอคณะกรรมการฝ่ายพัฒนานิสิต ✨
     </div>
 </div>
@@ -626,8 +629,8 @@ dashboard_html = f"""
         }}
         .container {{
             display: flex;
-            gap: 20px;
-            max-width: 900px;
+            gap: 25px;
+            max-width: 1000px;
             margin: 0 auto;
             flex-wrap: wrap;
             justify-content: center;
@@ -648,7 +651,7 @@ dashboard_html = f"""
         .ai-card {{
             background: #ffffff;
             border-radius: 20px;
-            padding: 18px 22px;
+            padding: 20px 25px;
             box-shadow: 0 10px 30px -5px rgba(79, 70, 229, 0.12), inset 0 0 0 1px rgba(226, 232, 240, 0.8);
             position: relative;
             overflow: hidden;
@@ -678,12 +681,12 @@ dashboard_html = f"""
         .card-1::before {{ background: linear-gradient(90deg, #3b82f6, #8b5cf6); }}
         
         .card-2 {{ 
-            flex: 1.5; min-width: 300px; text-align: center; 
+            flex: 1.5; min-width: 320px; text-align: center; 
             animation-delay: 0.5s; /* กล่องสองตามมาทีหลัง หน่วง 0.5 วิ */
         }}
         .card-2::before {{ background: linear-gradient(90deg, #10b981, #0ea5e9, #f43f5e); }}
 
-        .title {{ font-size: 13.5px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }}
+        .title {{ font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }}
         
         .gradient-text {{
             background-clip: text;
@@ -692,24 +695,24 @@ dashboard_html = f"""
             font-weight: 800;
             display: inline-block;
         }}
-        .total-num {{ font-size: 38px; background-image: linear-gradient(135deg, #3b82f6, #8b5cf6); line-height: 1.1; }}
-        .unit {{ font-size: 13.5px; color: #94a3b8; font-weight: 500; margin-left: 5px; }}
+        .total-num {{ font-size: 42px; background-image: linear-gradient(135deg, #3b82f6, #8b5cf6); line-height: 1.1; }}
+        .unit {{ font-size: 14px; color: #94a3b8; font-weight: 500; margin-left: 5px; }}
 
-        .score-container {{ display: flex; justify-content: space-around; align-items: center; margin-top: 12px; }}
+        .score-container {{ display: flex; justify-content: space-around; align-items: center; margin-top: 15px; }}
         .score-box {{ text-align: center; }}
-        .score-num {{ font-size: 28px; line-height: 1.1; }}
+        .score-num {{ font-size: 32px; line-height: 1.1; }}
         
         .score-90 {{ background-image: linear-gradient(135deg, #10b981, #047857); }}
         .score-80 {{ background-image: linear-gradient(135deg, #0ea5e9, #2563eb); }}
         .score-below {{ background-image: linear-gradient(135deg, #f43f5e, #be123c); }}
         
-        .score-label {{ font-size: 12px; color: #64748b; font-weight: 500; margin-top: 4px; }}
+        .score-label {{ font-size: 13px; color: #64748b; font-weight: 500; margin-top: 4px; }}
         
         .divider {{ 
             width: 1.5px; 
-            height: 45px; 
+            height: 50px; 
             background: linear-gradient(to bottom, transparent, #cbd5e1, transparent); 
-            margin: 0 8px; 
+            margin: 0 10px; 
         }}
     </style>
 </head>
