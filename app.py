@@ -602,7 +602,7 @@ st.markdown("""
 col1, col2 = st.columns([1, 1.2], gap="large")
 
 with col1:
-    st.markdown("### <span class='anim-folder'>📁</span> 1. อัปโหลดเอกสาร", unsafe_allow_html=True)
+    st.markdown("### <span class='anim-folder'>📁</span>    1. อัปโหลดเอกสาร", unsafe_allow_html=True)
     # 📌 ข้อความเตือนตัวสีแดง (ย้ายมาอยู่ล่างหัวข้อ และ อยู่ก่อนกล่องอัปโหลด)
     st.markdown(
         "<p style='color: #e74c3c; font-size: 14px; font-weight: 500; margin-top: -5px; margin-bottom: 12px;'>"
@@ -627,7 +627,7 @@ with col1:
 # 📊 คอลัมน์ที่ 2
 # ==========================================
 with col2:
-    st.markdown("### <span class='anim-robot'>🤖</span> 2. ผลการวิเคราะห์จาก AI", unsafe_allow_html=True)
+    st.markdown("### <span class='anim-robot'>🤖</span>    2. ผลการวิเคราะห์จาก AI", unsafe_allow_html=True)
     
     # ... (ส่วนโค้ดด้านล่างปล่อยไว้ตามเดิมได้เลยครับ) ...
     
