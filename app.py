@@ -45,34 +45,52 @@ st.markdown("""
             visibility: hidden;
         }
 
-        /* 🎬 คีย์เฟรมและคลาสสำหรับทำให้อิโมจิ/ไอคอนขยับได้ตลอดเวลา */
-        @keyframes floatingIcon {
-            0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-6px) rotate(8deg) scale(1.1); }
-            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        /* 🎬 แอนิเมชันเฉพาะตัวตามที่สั่ง */
+        @keyframes folderOpenClose {
+            0% { transform: scaleX(1); }
+            50% { transform: scaleX(0.82) skewX(-8deg); }
+            100% { transform: scaleX(1); }
         }
-        @keyframes pulseGlow {
-            0% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 6px rgba(255,215,0,0.8)); }
-            100% { transform: scale(1); opacity: 0.9; }
+        @keyframes robotBlink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
         }
-        @keyframes bounceLeftRight {
-            0% { transform: translateX(0px); }
+        @keyframes rocketLaunch {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(4px, -6px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        @keyframes dartShoot {
+            0% { transform: translate(-8px, 4px) scale(0.9); opacity: 0.6; }
+            50% { transform: translate(0px, 0px) scale(1.1); opacity: 1; }
+            100% { transform: translate(-8px, 4px) scale(0.9); opacity: 0.6; }
+        }
+        @keyframes handPoint {
+            0%, 100% { transform: translateX(0px); }
             50% { transform: translateX(6px); }
-            100% { transform: translateX(0px); }
         }
-        
-        .animated-icon-float {
+
+        .anim-folder {
             display: inline-block;
-            animation: floatingIcon 2.2s ease-in-out infinite;
+            animation: folderOpenClose 1.8s ease-in-out infinite;
+            transform-origin: left center;
         }
-        .animated-icon-pulse {
+        .anim-robot {
             display: inline-block;
-            animation: pulseGlow 1.8s ease-in-out infinite;
+            animation: robotBlink 3.5s ease-in-out infinite;
+            transform-origin: center;
         }
-        .animated-icon-bounce {
+        .anim-rocket {
             display: inline-block;
-            animation: bounceLeftRight 1.5s ease-in-out infinite;
+            animation: rocketLaunch 1.4s ease-in-out infinite;
+        }
+        .anim-dart {
+            display: inline-block;
+            animation: dartShoot 1.2s ease-in-out infinite;
+        }
+        .anim-hand {
+            display: inline-block;
+            animation: handPoint 1s ease-in-out infinite;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -540,7 +558,7 @@ st.markdown("""
     <h1>ระบบตรวจแบบฟอร์มโครงการพัฒนานิสิต</h1>
     <p>คณะศึกษาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์</p>
     <div style="margin-top: 15px; font-size: 15px; background-color: rgba(255,255,255,0.15); display: inline-block; padding: 8px 25px; border-radius: 30px; font-weight: 400; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-        <span class="animated-icon-pulse">✨</span> ระบบการตรวจสอบโครงสร้าง การสะกดคำ และความสมเหตุสมผลของโครงการ โดยใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) เพื่อใช้เป็นแนวทางในการปรับปรุงเอกสารเบื้องต้น ก่อนนำเสนอคณะกรรมการฝ่ายพัฒนานิสิต <span class="animated-icon-pulse">✨</span>
+        ✨ ระบบการตรวจสอบโครงสร้าง การสะกดคำ และความสมเหตุสมผลของโครงการ โดยใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) เพื่อใช้เป็นแนวทางในการปรับปรุงเอกสารเบื้องต้น ก่อนนำเสนอคณะกรรมการฝ่ายพัฒนานิสิต ✨
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -548,11 +566,11 @@ st.markdown("""
 col1, col2 = st.columns([1, 1.2], gap="large")
 
 with col1:
-    st.markdown("### <span class='animated-icon-float'>📁</span> 1. อัปโหลดเอกสาร", unsafe_allow_html=True)
+    st.markdown("### <span class='anim-folder'>📁</span> 1. อัปโหลดเอกสาร", unsafe_allow_html=True)
     # 📌 ข้อความเตือนตัวสีแดง (ย้ายมาอยู่ล่างหัวข้อ และ อยู่ก่อนกล่องอัปโหลด)
     st.markdown(
         "<p style='color: #e74c3c; font-size: 14px; font-weight: 500; margin-top: -5px; margin-bottom: 12px;'>"
-        "<span class='animated-icon-pulse'>🔴</span> <b>โปรดตรวจสอบว่า ได้ตั้งชื่อไฟล์เป็นชื่อโครงการแล้วหรือยัง?</b>"
+        "🔴 <b>โปรดตรวจสอบว่า ได้ตั้งชื่อไฟล์เป็นชื่อโครงการแล้วหรือยัง?</b>"
         "</p>", 
         unsafe_allow_html=True
     )
@@ -573,7 +591,7 @@ with col1:
 # 📊 คอลัมน์ที่ 2
 # ==========================================
 with col2:
-    st.markdown("### <span class='animated-icon-float'>🤖</span>2. ผลการวิเคราะห์จาก AI", unsafe_allow_html=True)
+    st.markdown("### <span class='anim-robot'>🤖</span>2. ผลการวิเคราะห์จาก AI", unsafe_allow_html=True)
     
     # ... (ส่วนโค้ดด้านล่างปล่อยไว้ตามเดิมได้เลยครับ) ...
     
@@ -626,7 +644,7 @@ with col2:
             st.info("👆 กรุณาติ๊กเครื่องหมาย ✅ หน้าข้อความ 🛡️ ยอมรับเงื่อนไขการประมวลผลข้อมูลด้านบน ก่อนกดปุ่มตรวจสอบ")
             
     else:
-        st.markdown("<span class='animated-icon-bounce'>👈</span> กรุณาอัปโหลดเอกสารในช่องด้านซ้ายมือ เพื่อเปิดใช้งานระบบ AI", unsafe_allow_html=True)
+        st.markdown("<span class='anim-hand'>👈</span> กรุณาอัปโหลดเอกสารในช่องด้านซ้ายมือ เพื่อเปิดใช้งานระบบ AI", unsafe_allow_html=True)
 
 # ==========================================
 # 📊 แผงสถิติภาพรวมของระบบ (สไตล์ Modern AI + แอนิเมชันลอยเข้า)
@@ -634,7 +652,7 @@ with col2:
 st.write("") 
 st.write("") 
 st.markdown("---") 
-st.markdown("<h4 style='text-align: center; color: #475569; font-family: \"Kanit\", sans-serif; margin-bottom: 25px; letter-spacing: 0.5px;'><span class='animated-icon-pulse'>✨</span> สถิติการประเมินโครงการภาพรวม <span class='animated-icon-pulse'>✨</span></h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: #475569; font-family: \"Kanit\", sans-serif; margin-bottom: 25px; letter-spacing: 0.5px;'>✨ สถิติการประเมินโครงการภาพรวม</h4>", unsafe_allow_html=True)
 
 try:
     sheet_id = "1jQVFbiKKQjxJVk8HHwLVzNlNDWyA2CPQSnNsVAz3aNk"
@@ -690,15 +708,24 @@ dashboard_html = f"""
             }}
         }}
 
-        @keyframes floatingIcon {{
-            0% {{ transform: translateY(0px) rotate(0deg) scale(1); }}
-            50% {{ transform: translateY(-6px) rotate(8deg) scale(1.1); }}
-            100% {{ transform: translateY(0px) rotate(0deg) scale(1); }}
+        @keyframes rocketLaunch {{
+            0% {{ transform: translate(0, 0) rotate(0deg); }}
+            50% {{ transform: translate(4px, -6px) rotate(-5deg); }}
+            100% {{ transform: translate(0, 0) rotate(0deg); }}
+        }}
+        @keyframes dartShoot {{
+            0% {{ transform: translate(-8px, 4px) scale(0.9); opacity: 0.6; }}
+            50% {{ transform: translate(0px, 0px) scale(1.1); opacity: 1; }}
+            100% {{ transform: translate(-8px, 4px) scale(0.9); opacity: 0.6; }}
         }}
 
-        .animated-icon-float {{
+        .anim-rocket {{
             display: inline-block;
-            animation: floatingIcon 2.2s ease-in-out infinite;
+            animation: rocketLaunch 1.4s ease-in-out infinite;
+        }}
+        .anim-dart {{
+            display: inline-block;
+            animation: dartShoot 1.2s ease-in-out infinite;
         }}
 
         .ai-card {{
@@ -773,13 +800,13 @@ dashboard_html = f"""
     <div class="container">
         <!-- ส่วนที่ 1: ตรวจไปแล้วทั้งหมด -->
         <div class="ai-card card-1">
-            <div class="title"><span class="animated-icon-float">🚀</span> โครงการที่ AI วิเคราะห์แล้ว</div>
+            <div class="title"><span class="anim-rocket">🚀</span> โครงการที่ AI วิเคราะห์แล้ว</div>
             <div><span id="total_count" class="gradient-text total-num">0</span> <span class="unit">โครงการ</span></div>
         </div>
         
         <!-- ส่วนที่ 2: สัดส่วนคะแนน -->
         <div class="ai-card card-2">
-            <div class="title"><span class="animated-icon-float">🎯</span> สัดส่วนคะแนนคุณภาพ</div>
+            <div class="title"><span class="anim-dart">🎯</span> สัดส่วนคะแนนคุณภาพ</div>
             <div class="score-container">
                 <div class="score-box">
                     <div id="count_90" class="gradient-text score-num score-90">0</div>
