@@ -260,9 +260,42 @@ def set_background(image_file):
                 color: #f3e8ff;
                 text-align: center;
             }}
+
+            /* ==========================================
+               📌 ปุ่ม Hamburger Menu สำหรับหน้าจอเล็ก
+               ========================================== */
+            .nav-toggle {{
+                display: none;
+            }}
+            .nav-toggle-label {{
+                display: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: #581c87;
+                padding: 5px;
+            }}
+
             @media (max-width: 1024px) {{
-                .nav-links {{ display: none; }}
-                .custom-navbar {{ justify-content: center; padding: 15px 20px; }}
+                .custom-navbar {{ 
+                    justify-content: space-between; 
+                    padding: 15px 20px; 
+                }}
+                .nav-toggle-label {{
+                    display: block; 
+                }}
+                .nav-links {{ 
+                    display: none; 
+                    width: 100%;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 15px;
+                    padding-top: 15px;
+                    margin-top: 10px;
+                    border-top: 1px solid #E2E8F0;
+                }}
+                .nav-toggle:checked ~ .nav-links {{
+                    display: flex;
+                }}
                 .hero-section h1 {{ font-size: 22px !important; }}
                 .hero-section p {{ font-size: 15px; }}
             }}
@@ -582,6 +615,13 @@ st.markdown("""
         <img src="https://lh3.googleusercontent.com/d/1Ib-E-X35YqI8vQl7wpar_UXdoQYdc_1N" alt="Logo KU">
         ฝ่ายพัฒนานิสิต คณะศึกษาศาสตร์ มก
     </div>
+    
+    <!-- เพิ่ม Checkbox และ Label สำหรับทำปุ่ม 3 ขีด (Hamburger Menu) -->
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-toggle-label">
+        <i class="fa-solid fa-bars"></i>
+    </label>
+    
     <div class="nav-links">
         <a href="https://canva.link/cbn78xyohbndm6z" target="_blank"><i class="fa-solid fa-list-check"></i> ขั้นตอนการเสนอโครงการ</a>
         <a href="https://drive.google.com/drive/u/1/folders/1HDGo2ImRk_Szo5gXn5JnCXsu6swffRux" target="_blank"><i class="fa-solid fa-download"></i> ดาวโหลดแบบฟอร์มต่าง ๆ</a>
@@ -628,10 +668,6 @@ with col1:
 # ==========================================
 with col2:
     st.markdown("### <span class='anim-robot'>🤖</span>    2. ผลการวิเคราะห์จาก AI", unsafe_allow_html=True)
-    
-    # ... (ส่วนโค้ดด้านล่างปล่อยไว้ตามเดิมได้เลยครับ) ...
-    
-    # ... (ส่วนโค้ดการตรวจของ AI เช่น กล่องติ๊กยอมรับ PDPA และปุ่มเริ่มตรวจ จะต่อจากบรรทัดนี้เลยครับ) ...
     
     if uploaded_file is not None and document_text.strip():
         # --- เพิ่มกล่องกดยอมรับ PDPA ---
