@@ -1,0 +1,10 @@
+name: Keep Streamlit Alive
+on:
+  schedule:
+    - cron: '0 */12 * * *' # ทำงานทุกๆ 12 ชั่วโมง
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Streamlit App
+        run: curl -s https://projectchecker-checkerform.streamlit.app/ > /dev/null
