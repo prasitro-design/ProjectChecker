@@ -611,31 +611,31 @@ with st.sidebar:
 st.markdown("""
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <div class="custom-navbar">
-    <div class="nav-brand">
-        <img src="https://lh3.googleusercontent.com/d/1Ib-E-X35YqI8vQl7wpar_UXdoQYdc_1N" alt="Logo KU">
-        ฝ่ายพัฒนานิสิต คณะศึกษาศาสตร์ มก
-    </div>
-    
-    <!-- เพิ่ม Checkbox และ Label สำหรับทำปุ่ม 3 ขีด (Hamburger Menu) -->
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <label for="nav-toggle" class="nav-toggle-label">
-        <i class="fa-solid fa-bars"></i>
-    </label>
-    
-    <div class="nav-links">
-        <a href="https://canva.link/cbn78xyohbndm6z" target="_blank"><i class="fa-solid fa-list-check"></i> ขั้นตอนการเสนอโครงการ</a>
-        <a href="https://drive.google.com/drive/u/1/folders/1HDGo2ImRk_Szo5gXn5JnCXsu6swffRux" target="_blank"><i class="fa-solid fa-download"></i> ดาวโหลดแบบฟอร์มต่าง ๆ</a>
-        <a href="https://canva.link/fmw17m6mt6o0pok" target="_blank"><i class="fa-solid fa-award"></i> Template เกียรติบัตร</a>
-        <a href="https://www.edu.ku.ac.th/" target="_blank"><i class="fa-solid fa-globe"></i> เว็บไซต์คณะศึกษาศาสตร์</a>
-    </div>
+<div class="nav-brand">
+<img src="https://lh3.googleusercontent.com/d/1Ib-E-X35YqI8vQl7wpar_UXdoQYdc_1N" alt="Logo KU">
+ฝ่ายพัฒนานิสิต คณะศึกษาศาสตร์ มก
+</div>
+
+<!-- เพิ่ม Checkbox และ Label สำหรับทำปุ่ม 3 ขีด (Hamburger Menu) -->
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
+<label for="nav-toggle" class="nav-toggle-label">
+<i class="fa-solid fa-bars"></i>
+</label>
+
+<div class="nav-links">
+<a href="https://canva.link/cbn78xyohbndm6z" target="_blank"><i class="fa-solid fa-list-check"></i> ขั้นตอนการเสนอโครงการ</a>
+<a href="https://drive.google.com/drive/u/1/folders/1HDGo2ImRk_Szo5gXn5JnCXsu6swffRux" target="_blank"><i class="fa-solid fa-download"></i> ดาวโหลดแบบฟอร์มต่าง ๆ</a>
+<a href="https://canva.link/fmw17m6mt6o0pok" target="_blank"><i class="fa-solid fa-award"></i> Template เกียรติบัตร</a>
+<a href="https://www.edu.ku.ac.th/" target="_blank"><i class="fa-solid fa-globe"></i> เว็บไซต์คณะศึกษาศาสตร์</a>
+</div>
 </div>
 
 <div class="hero-section">
-    <h1>ระบบตรวจแบบฟอร์มโครงการพัฒนานิสิต</h1>
-    <p>คณะศึกษาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์</p>
-    <div style="margin-top: 15px; font-size: 15px; background-color: rgba(255,255,255,0.15); display: inline-block; padding: 8px 25px; border-radius: 30px; font-weight: 400; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-        <span class="anim-star">✨</span> ระบบการตรวจสอบโครงสร้าง การสะกดคำ และความสมเหตุสมผลของโครงการ โดยใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) เพื่อใช้เป็นแนวทางในการปรับปรุงเอกสารเบื้องต้น ก่อนนำเสนอคณะกรรมการฝ่ายพัฒนานิสิต <span class="anim-star">✨</span>
-    </div>
+<h1>ระบบตรวจแบบฟอร์มโครงการพัฒนานิสิต</h1>
+<p>คณะศึกษาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์</p>
+<div style="margin-top: 15px; font-size: 15px; background-color: rgba(255,255,255,0.15); display: inline-block; padding: 8px 25px; border-radius: 30px; font-weight: 400; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+<span class="anim-star">✨</span> ระบบการตรวจสอบโครงสร้าง การสะกดคำ และความสมเหตุสมผลของโครงการ โดยใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) เพื่อใช้เป็นแนวทางในการปรับปรุงเอกสารเบื้องต้น ก่อนนำเสนอคณะกรรมการฝ่ายพัฒนานิสิต <span class="anim-star">✨</span>
+</div>
 </div>
 """, unsafe_allow_html=True)
 
