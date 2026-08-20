@@ -624,7 +624,9 @@ st.markdown("""
 
 <div class="nav-links">
 <a href="https://canva.link/cbn78xyohbndm6z" target="_blank"><i class="fa-solid fa-list-check"></i> ขั้นตอนการเสนอโครงการ</a>
-<a href="https://drive.google.com/folders/d/1j7EuNR8I7hOl4lJ3UOPg1jTxXySNlXuj" target="_blank"><i class="fa-solid fa-download"></i> ดาวโหลดแบบฟอร์มต่าง ๆ</a>
+<a href="https://drive.google.com/drive/folders/1j7EuNR8I7hOl4lJ3UOPg1jTxXySNlXuj" target="_blank" rel="noopener noreferrer">
+  <i class="fa-solid fa-download"></i> ดาวน์โหลดแบบฟอร์มต่าง ๆ
+</a>
 <a href="https://canva.link/fmw17m6mt6o0pok" target="_blank"><i class="fa-solid fa-award"></i> Template เกียรติบัตร</a>
 <a href="https://www.edu.ku.ac.th/" target="_blank"><i class="fa-solid fa-globe"></i> เว็บไซต์คณะศึกษาศาสตร์</a>
 </div>
